@@ -14,11 +14,12 @@ public class GameDemo {
 		
 		System.out.print("Please enter your name: ");
 		String name = kb.next();
-		
+		Character c = new Character();
+		c.setName(name);
 		int r = rn.nextInt(8);
-		Role role = assignRole(r);
+		c.setRole(r);
 		
-		players.add(name,role);
+		players.add(c);
 		
 		for(int i=0; i<players.size(); i++) {
 			if(players.get(i).getIsMafia()==true) {
