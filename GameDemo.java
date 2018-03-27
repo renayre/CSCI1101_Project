@@ -27,5 +27,7 @@ public class GameDemo {
 				mafia.add(players.get(i));
 			}
 		}
+		new Game(players);
 	}
 }
+
