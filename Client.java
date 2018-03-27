@@ -142,16 +142,15 @@ public class chat_client extends javax.swing.JFrame {
             s = new Socket("134.190.174.21",1200); 
             din = new DataInputStream(s.getInputStream());
             dout = new DataOutputStream(s.getOutputStream());
+        	System.out.print("Connected");
             String msgin = "";
             
             while(!msgin.equals("exit")){
                 msgin = din.readUTF();
                 msg_area.setText(msg_area.getText().trim()+"\n Server: \t"+msgin);
-                
-                
-                
             }
         }catch(Exception e){
+        	System.out.print("Error");
             
         }
     }
