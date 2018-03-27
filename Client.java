@@ -139,7 +139,7 @@ public class chat_client extends javax.swing.JFrame {
         });
         
         try{
-            s = new Socket("127.0.0.1",1200); 
+            s = new Socket("134.190.174.21",1200); 
             din = new DataInputStream(s.getInputStream());
             dout = new DataOutputStream(s.getOutputStream());
             String msgin = "";
