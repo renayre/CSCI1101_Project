@@ -12,9 +12,10 @@ public class GameDemo {
 		ArrayList<Character> mafia = new ArrayList<Character>();
 		Random rn = new Random();
 		
+		//intake
 		System.out.print("Please enter your name: ");
 		String name = kb.next();
-		Character c = new Character();
+		Character c = new Character(); //create empty
 		c.setName(name);
 		int r = rn.nextInt(8);
 		c.setRole(r);
