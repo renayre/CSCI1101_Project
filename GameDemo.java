@@ -28,9 +28,4 @@ public class GameDemo {
 			}
 		}
 	}
-
-//mafiaNight
-public Character mafiaNight(){
-	
-}
 }
