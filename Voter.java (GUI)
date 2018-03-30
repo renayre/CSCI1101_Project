@@ -1,0 +1,97 @@
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+
+public class Voter extends Application{
+   private int count; //keeps track of presses
+   private int count1;
+   private int count2;
+   private int count3;
+   private int count4;
+   private int count5;
+   private int count6;
+   private int count7;
+   private Text countText;
+   private Button push, push1, push2, push3, push4, push5, push6, push7;
+   private FlowPane pane;
+   @Override
+   public void start(Stage primaryStage){
+      count=0;
+      countText = new Text("Pushes: 0");//names of players would go here (more text object created)
+      Font font1 = Font.font("Arial", FontWeight.BOLD,20);
+      countText.setFont(font1);
+      
+      push = new Button("VOTE");
+      push.setStyle("-fx-font:20 Arial");
+      push1 = new Button("VOTE");
+      push.setStyle("-fx-font:20 Arial");
+      push2 = new Button("VOTE");
+      push.setStyle("-fx-font:20 Arial");
+      push3 = new Button("VOTE");
+      push.setStyle("-fx-font:20 Arial");
+      push4 = new Button("VOTE");
+      push.setStyle("-fx-font:20 Arial");
+      push5 = new Button("VOTE");
+      push.setStyle("-fx-font:20 Arial");
+      push6 = new Button("VOTE");
+      push.setStyle("-fx-font:20 Arial");
+      push7 = new Button("VOTE");
+      push.setStyle("-fx-font:20 Arial");
+      
+      push.setOnAction(this::processButtonPress);
+      push1.setOnAction(this::processButtonPress);
+      push2.setOnAction(this::processButtonPress);
+      push3.setOnAction(this::processButtonPress);
+      push4.setOnAction(this::processButtonPress);
+      push5.setOnAction(this::processButtonPress);
+      push6.setOnAction(this::processButtonPress);
+      push7.setOnAction(this::processButtonPress);
+      
+      //add display of names taken in above as text^^
+      
+      pane = new FlowPane();
+      pane.setAlignment(Pos.CENTER);
+      pane.setHgap(20);
+      pane.setStyle("-fx-background-solor:CYAN");
+      pane.getChildren().addAll(push, push1, push2, push3,push4,push5,push6,push7, countText);
+      countText.setVisible(false);
+      
+      Scene scene = new Scene(pane, 800, 300);
+      
+      primaryStage.setTitle("Voting Time");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+      
+   }
+   //what happens if buttons are pressed
+   public void processButtonPress(ActionEvent event){
+      if(event.getSource()==push)
+         count++;
+      if(event.getSource()==push1)
+         count1++;
+      if(event.getSource()==push2)
+         count2++;
+      if(event.getSource()==push3)
+         count3++;
+      if(event.getSource()==push4)
+         count4++;
+      if(event.getSource()==push5)
+         count5++;
+      if(event.getSource()==push6)
+         count6++;
+      if(event.getSource()==push7)
+         count7++; 
+   }
+
+   //run app
+   public static void main(String[] args){
+      Application.launch(args);
+   }
+}
