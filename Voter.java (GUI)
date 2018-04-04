@@ -5,63 +5,63 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.text.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import java.util.ArrayList;
 
 public class Voter extends Application{
-   private int count; //keeps track of presses
-   private int count1;
-   private int count2;
-   private int count3;
-   private int count4;
-   private int count5;
-   private int count6;
-   private int count7;
+   //initializing attributes
+   private int count,count1,count2,count3,count4,count5,count6,count7; //keeps track of presses
    private Text countText;
+   private Text instructions;
    private Button push, push1, push2, push3, push4, push5, push6, push7;
    private FlowPane pane;
+   ArrayList<Integer> allCounts= new ArrayList<Integer>();
+   
    @Override
    public void start(Stage primaryStage){
       count=0;
-      countText = new Text("Pushes: 0");//names of players would go here (more text object created)
+      countText = new Text("Pushes:");//names of players would go here (more text object created)
+      instructions= new Text("You only have one opportunity to vote- choose wisely!");
       Font font1 = Font.font("Arial", FontWeight.BOLD,20);
       countText.setFont(font1);
+      instructions.setFont(font1);
       
-      push = new Button("VOTE");
+      push = new Button("VOTE UserName");//don't want "username"- want to input the clients user names
       push.setStyle("-fx-font:20 Arial");
-      push1 = new Button("VOTE");
-      push.setStyle("-fx-font:20 Arial");
-      push2 = new Button("VOTE");
-      push.setStyle("-fx-font:20 Arial");
-      push3 = new Button("VOTE");
-      push.setStyle("-fx-font:20 Arial");
-      push4 = new Button("VOTE");
-      push.setStyle("-fx-font:20 Arial");
-      push5 = new Button("VOTE");
-      push.setStyle("-fx-font:20 Arial");
-      push6 = new Button("VOTE");
-      push.setStyle("-fx-font:20 Arial");
-      push7 = new Button("VOTE");
-      push.setStyle("-fx-font:20 Arial");
-      
       push.setOnAction(this::processButtonPress);
+      push1 = new Button("VOTE UserName");
+      push1.setStyle("-fx-font:20 Arial");
       push1.setOnAction(this::processButtonPress);
+      push2 = new Button("VOTE UserName");
+      push2.setStyle("-fx-font:20 Arial");
       push2.setOnAction(this::processButtonPress);
+      push3 = new Button("VOTE UserName");
+      push3.setStyle("-fx-font:20 Arial");
       push3.setOnAction(this::processButtonPress);
+      push4 = new Button("VOTE UserName");
+      push4.setStyle("-fx-font:20 Arial");
       push4.setOnAction(this::processButtonPress);
+      push5 = new Button("VOTE UserName");
+      push5.setStyle("-fx-font:20 Arial");
       push5.setOnAction(this::processButtonPress);
+      push6 = new Button("VOTE UserName");
+      push6.setStyle("-fx-font:20 Arial");
       push6.setOnAction(this::processButtonPress);
+      push7 = new Button("VOTE UserName");
+      push7.setStyle("-fx-font:20 Arial");
       push7.setOnAction(this::processButtonPress);
       
-      //add display of names taken in above as text^^
+      //add display of names from sashas code
       
       pane = new FlowPane();
       pane.setAlignment(Pos.CENTER);
-      pane.setHgap(20);
-      pane.setStyle("-fx-background-solor:CYAN");
-      pane.getChildren().addAll(push, push1, push2, push3,push4,push5,push6,push7, countText);
-      countText.setVisible(false);
+      pane.setHgap(30);
+      pane.setStyle("-fx-background-color:WHITE");
+      pane.getChildren().addAll(push, push1, push2, push3,push4,push5,push6,push7, instructions /*,countText*/ );
+      countText.setVisible(true);//don't want count visable
       
       Scene scene = new Scene(pane, 800, 300);
       
@@ -70,28 +70,46 @@ public class Voter extends Application{
       primaryStage.show();
       
    }
-   //what happens if buttons are pressed
+   //adding to count and ensuring that only able to vote once
    public void processButtonPress(ActionEvent event){
-      if(event.getSource()==push)
+      if(event.getSource()==push&&count<1&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0){
          count++;
-      if(event.getSource()==push1)
+         countText.setText("Pushes: " + count);
+      } if(event.getSource()==push1&&count==0&&count1<1&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0)
          count1++;
-      if(event.getSource()==push2)
+      if(event.getSource()==push2&&count==0&&count1==0&&count2<1&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0)
          count2++;
-      if(event.getSource()==push3)
+      if(event.getSource()==push3&&count==0&&count1==0&&count2==0&&count3<1&&count4==0&&count5==0&&count6==0&&count7==0)
          count3++;
-      if(event.getSource()==push4)
+      if(event.getSource()==push4&&count==0&&count1==0&&count2==0&&count3==0&&count4<1&&count5==0&&count6==0&&count7==0)
          count4++;
-      if(event.getSource()==push5)
+      if(event.getSource()==push5&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5<1&&count6==0&&count7==0)
          count5++;
-      if(event.getSource()==push6)
+      if(event.getSource()==push6&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6<1&&count7==0)
          count6++;
-      if(event.getSource()==push7)
+      if(event.getSource()==push7&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7<1)
          count7++; 
    }
-
+   
+   //add all counts to the arrayList
+   public ArrayList<Integer> arrayList(){
+      allCounts.add(count);
+      allCounts.add(count1);
+      allCounts.add(count2);
+      allCounts.add(count3);
+      allCounts.add(count4);
+      allCounts.add(count5);
+      allCounts.add(count6);
+      allCounts.add(count7);
+      System.out.println(allCounts);//why you no print
+      return allCounts;
+   }   
+   
    //run app
    public static void main(String[] args){
       Application.launch(args);
+      //System.out.println(allCounts.arrayList);
+      /*if (count!=0 ||count1!=0 ||count2!=0 ||count3!=0 ||count4!=0 ||count5!=0 ||count6!=0 ||count7!=0){ CLOSE SOME WAY*/
    }
 }
+
