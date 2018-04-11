@@ -1,0 +1,31 @@
+/*CSCI 1101 - MAFIA Project
+ * Kate, Elliot, Sasha, Allie, Rey */
+
+import java.util.Scanner;
+import java.util.ArrayList;
+
+public class Game {
+	Scanner kb = new Scanner(System.in);
+	static ArrayList<Character> players = new ArrayList<Character>(); //server
+	ArrayList<Character> mafia = new ArrayList<Character>();
+	
+public Game(ArrayList<Character> l) {
+	ArrayList<Character> players = l; //server
+	for(int i=0; i<players.size();i++) {//server
+		if(players.get(1).getIsMafia() == true) {
+			mafia.add(players.get(i));
+		}
+	}
+}
+
+public Character vote() {
+	System.out.print("Time to vote on who to lynch. Press 1 for "+player1.getName()+", Press 2 for "+player2.getName()+", Press 3 for "+player3.getName()+", Press 4 for "+player4.getName()+", Press 5 for "+player5.getName()+", Press 6 for "+player6.getName()+", Press 7 for "+player7.getName()+" or Press 8 for "+player8.getName()+" :");
+		int choice = kb.nextInt(); //choice
+}
+public static ArrayList<Character> getPlayers(){
+	return players;
+}
+public ArrayList<Character> getMafia(){
+	return mafia;
+}
+}
