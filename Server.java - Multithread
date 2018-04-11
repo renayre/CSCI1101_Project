@@ -1,10 +1,23 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 public class Server {
 	public static void main(String[] args) throws IOException {	
 		//server socket for client trying port #
-		ServerSocket serverSocket = new ServerSocket(8896);
+		ServerSocket serverSocket = new ServerSocket(9003);
 		System.out.println("Server Socket Created.");
 		//socket object to read in new client requests
 		Socket socket = null;
@@ -32,6 +45,9 @@ class ClientHandler extends Thread{
 	private final DataOutputStream out;
 	private final Socket socket;
 	private final String name;
+	private Game game;
+	private ArrayList<Character> players = game.getPlayers();
+	private ArrayList <Integer> role = new ArrayList<Integer>();
 	
 	//constructor
 	public ClientHandler(DataInputStream is, DataOutputStream out, Socket s, String name) {
@@ -43,22 +59,59 @@ class ClientHandler extends Thread{
 	
 	@Override
 	public void run() {
-		String received1;
-		String received2;
+		String name1, name2, name3, name4, name5, name6, name7, name8;
 		String send;
+		Character c1=null, c2=null, c3=null, c4=null, c5=null, c6=null, c7=null, c8=null;
 
 		//ask user's name
 		System.out.println("Asking user for name:");
 		try {
 			out.writeUTF("What is your name?");
 			if(name.equals("Thread1")) {
-				received1 = inputStream.readUTF();
-				System.out.println("User's ("+name+") name is: " + received1);
+				name1 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + name1);
+				c1.setName(name1);
 			}
 			if(name.equals("Thread2")) {
-				received2 = inputStream.readUTF();
-				System.out.println("User's ("+name+") name is: " + received2);
+				name2 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + name2);
+				c2.setName(name2);
 			}
+			if(name.equals("Thread3")) {
+				name3 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + name3);
+				c3.setName(name3);
+			}
+			if(name.equals("Thread4")) {
+				name4 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + name4);
+				c4.setName(name4);
+			}
+			if(name.equals("Thread5")) {
+				name5 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + name5);
+				c5.setName(name5);
+			}
+			if(name.equals("Thread6")) {
+				name6 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + name6);
+				c6.setName(name6);
+			}
+			if(name.equals("Thread7")) {
+				name7 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + name7);
+				c7.setName(name7);
+			}
+			if(name.equals("Thread8")) {
+				name8 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + name8);
+				c8.setName(name8);
+			}
+			//adds numbs to arrayList
+			for(int i=1; i<=8;i++) {
+				role.add(i);
+			}
+			
 		} 
 		catch (IOException e1) {
 			e1.printStackTrace();
