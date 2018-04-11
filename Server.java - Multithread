@@ -1,0 +1,76 @@
+import java.io.*;
+import java.net.*;
+
+public class Server {
+	public static void main(String[] args) throws IOException {	
+		//server socket for client trying port #
+		ServerSocket serverSocket = new ServerSocket(8896);
+		System.out.println("Server Socket Created.");
+		//socket object to read in new client requests
+		Socket socket = null;
+		DataInputStream inputStream = null;
+		DataOutputStream out = null;
+		for(int i=1; i<3; i++) {
+			socket = serverSocket.accept();
+			System.out.println("New client is accepted.");
+			
+			inputStream = new DataInputStream(socket.getInputStream());
+			//for server to write back
+			out = new DataOutputStream(socket.getOutputStream());
+			
+		//begin thread process
+		System.out.println("Beginning thread process");
+		Thread thread = new ClientHandler(inputStream, out, socket, "Thread"+i);
+		System.out.println("Thread created.");
+		thread.start();
+		}			
+	}
+}
+class ClientHandler extends Thread{
+	//attributes
+	private final DataInputStream inputStream;
+	private final DataOutputStream out;
+	private final Socket socket;
+	private final String name;
+	
+	//constructor
+	public ClientHandler(DataInputStream is, DataOutputStream out, Socket s, String name) {
+		inputStream = is;
+		this.out = out;
+		socket = s;
+		this.name = name;
+	}
+	
+	@Override
+	public void run() {
+		String received1;
+		String received2;
+		String send;
+
+		//ask user's name
+		System.out.println("Asking user for name:");
+		try {
+			out.writeUTF("What is your name?");
+			if(name.equals("Thread1")) {
+				received1 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + received1);
+			}
+			if(name.equals("Thread2")) {
+				received2 = inputStream.readUTF();
+				System.out.println("User's ("+name+") name is: " + received2);
+			}
+		} 
+		catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		try {
+			//close resources
+			inputStream.close();
+			out.close();
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
