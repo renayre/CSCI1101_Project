@@ -62,55 +62,74 @@ class ClientHandler extends Thread{
 		String name1, name2, name3, name4, name5, name6, name7, name8;
 		String send;
 		Character c1=null, c2=null, c3=null, c4=null, c5=null, c6=null, c7=null, c8=null;
-
+		game = new Game(players);
+		
 		//ask user's name
 		System.out.println("Asking user for name:");
 		try {
+			//adds numbs to arrayList
+			for(int i=1; i<=8;i++) {
+				role.add(i);
+			}
 			out.writeUTF("What is your name?");
 			if(name.equals("Thread1")) {
 				name1 = inputStream.readUTF();
 				System.out.println("User's ("+name+") name is: " + name1);
 				c1.setName(name1);
+				c1.setRole(role.get(0));
+				role.remove(0);
+				
 			}
 			if(name.equals("Thread2")) {
 				name2 = inputStream.readUTF();
 				System.out.println("User's ("+name+") name is: " + name2);
 				c2.setName(name2);
+				c2.setRole(role.get(0));
+				role.remove(0);
 			}
 			if(name.equals("Thread3")) {
 				name3 = inputStream.readUTF();
 				System.out.println("User's ("+name+") name is: " + name3);
 				c3.setName(name3);
+				c3.setRole(role.get(0));
+				role.remove(0);
 			}
 			if(name.equals("Thread4")) {
 				name4 = inputStream.readUTF();
 				System.out.println("User's ("+name+") name is: " + name4);
 				c4.setName(name4);
+				c4.setRole(role.get(0));
+				role.remove(0);
 			}
 			if(name.equals("Thread5")) {
 				name5 = inputStream.readUTF();
 				System.out.println("User's ("+name+") name is: " + name5);
 				c5.setName(name5);
+				c5.setRole(role.get(0));
+				role.remove(0);
 			}
 			if(name.equals("Thread6")) {
 				name6 = inputStream.readUTF();
 				System.out.println("User's ("+name+") name is: " + name6);
 				c6.setName(name6);
+				c6.setRole(role.get(0));
+				role.remove(0);
 			}
 			if(name.equals("Thread7")) {
 				name7 = inputStream.readUTF();
 				System.out.println("User's ("+name+") name is: " + name7);
 				c7.setName(name7);
+				c7.setRole(role.get(0));
+				role.remove(0);
 			}
 			if(name.equals("Thread8")) {
 				name8 = inputStream.readUTF();
 				System.out.println("User's ("+name+") name is: " + name8);
 				c8.setName(name8);
+				c8.setRole(role.get(0));
+				role.remove(0);
 			}
-			//adds numbs to arrayList
-			for(int i=1; i<=8;i++) {
-				role.add(i);
-			}
+			
 			
 		} 
 		catch (IOException e1) {
