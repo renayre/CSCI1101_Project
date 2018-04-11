@@ -2,42 +2,162 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-public class Client {
-	public static void main(String[] args) throws IOException{
-		Scanner kb = new Scanner(System.in);
-		System.out.println("Client called.");
-			//create new socket 
-			Socket socket = new Socket("134.190.132.214", 8896);
-			System.out.println("Socket Created");
-			
-			//to send data to server
-			DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-			//to get data from server
-			DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-			
-			//send to and receive from client handler
-			System.out.println(inputStream.readUTF());
-			String sendTo = kb.nextLine();
-			outputStream.writeUTF(sendTo);
-	}
+public class MultiThreadClient {
+        public static void main(String[] args) throws IOException{
+                Scanner kb = new Scanner(System.in);
+                System.out.println("Client called.");
+                        //create new socket 
+                        Socket socket = new Socket("134.190.132.214", 8999);
+                        System.out.println("Socket Created");
+                        
+                        //to send data to server
+                        DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                        //to get data from server
+                        DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                        
+                        //send to and receive from client handler
+                        System.out.println(inputStream.readUTF());
+                        String sendTo = kb.nextLine();
+                        outputStream.writeUTF(sendTo);
+        }
 }
 
 class Clientt2 {
-	public static void main(String[] args) throws IOException{
-		Scanner kb = new Scanner(System.in);
-		System.out.println("Client called.");
-			//create new socket 
-			Socket socket = new Socket("134.190.132.214", 8896);
-			System.out.println("Socket Created");
-			
-			//to send data to server
-			DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-			//to get data from server
-			DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-			
-			//send to and receive from client handler
-			System.out.println(inputStream.readUTF());
-			String sendTo = kb.nextLine();
-			outputStream.writeUTF(sendTo);
-	}
+        public static void main(String[] args) throws IOException{
+                Scanner kb = new Scanner(System.in);
+                System.out.println("Client called.");
+                        //create new socket 
+                        Socket socket = new Socket("134.190.132.214", 8999);
+                        System.out.println("Socket Created");
+                        
+                        //to send data to server
+                        DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                        //to get data from server
+                        DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                        
+                        //send to and receive from client handler
+                        System.out.println(inputStream.readUTF());
+                        String sendTo = kb.nextLine();
+                        outputStream.writeUTF(sendTo);
+        }
+}
+
+class Clientt3 {
+    public static void main(String[] args) throws IOException{
+            Scanner kb = new Scanner(System.in);
+            System.out.println("Client called.");
+                    //create new socket 
+                    Socket socket = new Socket("134.190.132.214", 8999);
+                    System.out.println("Socket Created");
+                    
+                    //to send data to server
+                    DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                    //to get data from server
+                    DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                    
+                    //send to and receive from client handler
+                    System.out.println(inputStream.readUTF());
+                    String sendTo = kb.nextLine();
+                    outputStream.writeUTF(sendTo);
+    }
+}
+
+class Clientt4 {
+    public static void main(String[] args) throws IOException{
+            Scanner kb = new Scanner(System.in);
+            System.out.println("Client called.");
+                    //create new socket 
+                    Socket socket = new Socket("134.190.132.214", 8999);
+                    System.out.println("Socket Created");
+                    
+                    //to send data to server
+                    DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                    //to get data from server
+                    DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                    
+                    //send to and receive from client handler
+                    System.out.println(inputStream.readUTF());
+                    String sendTo = kb.nextLine();
+                    outputStream.writeUTF(sendTo);
+    }
+}
+
+class Clientt5 {
+    public static void main(String[] args) throws IOException{
+            Scanner kb = new Scanner(System.in);
+            System.out.println("Client called.");
+                    //create new socket 
+                    Socket socket = new Socket("134.190.132.214", 8999);
+                    System.out.println("Socket Created");
+                    
+                    //to send data to server
+                    DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                    //to get data from server
+                    DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                    
+                    //send to and receive from client handler
+                    System.out.println(inputStream.readUTF());
+                    String sendTo = kb.nextLine();
+                    outputStream.writeUTF(sendTo);
+    }
+}
+
+class Clientt6 {
+    public static void main(String[] args) throws IOException{
+            Scanner kb = new Scanner(System.in);
+            System.out.println("Client called.");
+                    //create new socket 
+                    Socket socket = new Socket("134.190.132.214", 8999);
+                    System.out.println("Socket Created");
+                    
+                    //to send data to server
+                    DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                    //to get data from server
+                    DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                    
+                    //send to and receive from client handler
+                    System.out.println(inputStream.readUTF());
+                    String sendTo = kb.nextLine();
+                    outputStream.writeUTF(sendTo);
+    }
+}
+
+class Clientt7 {
+    public static void main(String[] args) throws IOException{
+            Scanner kb = new Scanner(System.in);
+            System.out.println("Client called.");
+                    //create new socket 
+                    Socket socket = new Socket("134.190.132.214", 8999);
+                    System.out.println("Socket Created");
+                    
+                    //to send data to server
+                    DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                    //to get data from server
+                    DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                    
+                    //send to and receive from client handler
+                    System.out.println(inputStream.readUTF());
+                    String sendTo = kb.nextLine();
+                    outputStream.writeUTF(sendTo);
+    }
+}
+
+class Clientt8 {
+    public static void main(String[] args) throws IOException{
+            Scanner kb = new Scanner(System.in);
+            System.out.println("Client called.");
+                    //create new socket 
+                    Socket socket = new Socket("134.190.132.214", 8999);
+                    System.out.println("Socket Created");
+                    
+                    //to send data to server
+                    DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+                    //to get data from server
+                    DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+                    
+                    //send to and receive from client handler
+                    System.out.println(inputStream.readUTF());
+                    String sendTo = kb.nextLine();
+                    outputStream.writeUTF(sendTo);
+    }
 }
