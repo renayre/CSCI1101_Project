@@ -78,40 +78,42 @@ public class Voter extends Application{
    
    
    //adding to count and ensuring that only able to vote once
-   public void processButtonPress(ActionEvent event){
+   //this 
+   public String processButtonPress(ActionEvent event){
       if(event.getSource()==push&&count<1&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0){
          count++;
          countText.setText("Pushes: " + count);
-         //allCounts.add(count);
-         System.exit(0);//works- should add to all below if statements but check if the arraylist still works
-      } if(event.getSource()==push1&&count==0&&count1<1&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0)
+         return user;
+         //System.exit(0);//works- check if the arraylist still works- REVIEW WHEN WE WRITE THE DEMO
+      } else if(event.getSource()==push1&&count==0&&count1<1&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0){
          count1++;
-         //allCounts.add(count1);
-         System.exit(0);
-      if(event.getSource()==push2&&count==0&&count1==0&&count2<1&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0)
+         return user1;
+         //System.exit(0);
+      } else if(event.getSource()==push2&&count==0&&count1==0&&count2<1&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0){
          count2++;
-         //allCounts.add(count2);
-         System.exit(0);
-      if(event.getSource()==push3&&count==0&&count1==0&&count2==0&&count3<1&&count4==0&&count5==0&&count6==0&&count7==0)
+         return user2;
+        //System.exit(0);
+      } else if(event.getSource()==push3&&count==0&&count1==0&&count2==0&&count3<1&&count4==0&&count5==0&&count6==0&&count7==0){
          count3++;
-         //allCounts.add(count3);
-         System.exit(0);
-      if(event.getSource()==push4&&count==0&&count1==0&&count2==0&&count3==0&&count4<1&&count5==0&&count6==0&&count7==0)
+         return user3;
+         //System.exit(0);
+      } else if(event.getSource()==push4&&count==0&&count1==0&&count2==0&&count3==0&&count4<1&&count5==0&&count6==0&&count7==0){
          count4++;
-         //allCounts.add(count4);
-         System.exit(0);
-      if(event.getSource()==push5&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5<1&&count6==0&&count7==0)
+         return user4;
+         //System.exit(0);
+     } else if(event.getSource()==push5&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5<1&&count6==0&&count7==0){
          count5++;
-         //allCounts.add(count5);
-         System.exit(0);
-      if(event.getSource()==push6&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6<1&&count7==0)
+         return user5;
+         //System.exit(0);
+      } else if(event.getSource()==push6&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6<1&&count7==0){
          count6++;
-         //allCounts.add(count6);
-         System.exit(0);
-      if(event.getSource()==push7&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7<1)
-         count7++; 
-         //allCounts.add(count7);
-         System.exit(0);
+         return user6;
+        //System.exit(0);
+      } else { //if(event.getSource()==push7&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7<1){
+         count7++;
+         return user6; 
+         //System.exit(0);
+     }
    }
    
    //add all counts to the arrayList
