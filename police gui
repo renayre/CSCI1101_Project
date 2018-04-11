@@ -1,0 +1,110 @@
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import java.util.ArrayList;
+
+public class PoliceGUI extends Application{
+   //initializing attributes
+   private boolean status1, status2, status3, status4, status5, status6, status7, status8; //status per player
+   private Text mafiaStatus;
+   private Text instructions;
+   private Button push, push1, push2, push3, push4, push5, push6, push7;
+   private FlowPane pane;
+   
+   @Override
+   public void start(Stage primaryStage){
+      mafiaStatus = new Text("Mafia Status: ");//names of players would go here (more text object created)
+      instructions= new Text("Who would you like to investigate tonight? (BE CAREFUL YOU ONLY HAVE ONE CLICK PER NIGHT)");
+      Font font1 = Font.font("Arial", FontWeight.BOLD,20);
+      mafiaStatus.setFont(font1);
+      instructions.setFont(font1);
+      
+      push = new Button("INVESTIGATE UserName");//don't want "userName"- want to input the clients user names
+      push.setStyle("-fx-font:20 Arial");
+      push.setOnAction(this::processButtonPress);
+      push1 = new Button("INVESTIGATE UserName");
+      push1.setStyle("-fx-font:20 Arial");
+      push1.setOnAction(this::processButtonPress);
+      push2 = new Button("INVESTIGATE UserName");
+      push2.setStyle("-fx-font:20 Arial");
+      push2.setOnAction(this::processButtonPress);
+      push3 = new Button("INVESTIGATE UserName");
+      push3.setStyle("-fx-font:20 Arial");
+      push3.setOnAction(this::processButtonPress);
+      push4 = new Button("INVESTIGATE UserName");
+      push4.setStyle("-fx-font:20 Arial");
+      push4.setOnAction(this::processButtonPress);
+      push5 = new Button("INVESTIGATE UserName");
+      push5.setStyle("-fx-font:20 Arial");
+      push5.setOnAction(this::processButtonPress);
+      push6 = new Button("INVESTIGATE UserName");
+      push6.setStyle("-fx-font:20 Arial");
+      push6.setOnAction(this::processButtonPress);
+      push7 = new Button("INVESTIGATE UserName");
+      push7.setStyle("-fx-font:20 Arial");
+      push7.setOnAction(this::processButtonPress);
+      
+      //add display of names from sashas code
+      
+      pane = new FlowPane();
+      pane.setAlignment(Pos.CENTER);
+      pane.setHgap(30);
+      pane.setStyle("-fx-background-color:WHITE");
+      pane.getChildren().addAll(push, push1, push2, push3,push4,push5,push6,push7, instructions, mafiaStatus );
+      mafiaStatus.setVisible(true);//don't want count visible
+      
+      Scene scene = new Scene(pane, 800, 300);
+      
+      primaryStage.setTitle("Investigation Time");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+      
+   }
+   //print if the selected user is mafia or not
+   public void processButtonPress(ActionEvent event){
+      if(event.getSource()==push1){
+    	 status1 = user1.getStatus();
+         mafiaStatus.setText("Mafia Status: "+status1);
+      }
+      if(event.getSource()==push2){
+    	 status2 = user2.getStatus();
+         mafiaStatus.setText("Mafia Status: "+status2);
+      }
+      if(event.getSource()==push3){
+    	 status3 = user3.getStatus();
+         mafiaStatus.setText("Mafia Status: "+status3);
+      }
+      if(event.getSource()==push4){
+    	 status4 = user4.getStatus();
+         mafiaStatus.setText("Mafia Status: "+status4);
+      }
+      if(event.getSource()==push5){
+    	 status5 = user5.getStatus();
+         mafiaStatus.setText("Mafia Status: "+status5);
+      }
+      if(event.getSource()==push6){
+    	 status6 = user6.getStatus();
+         mafiaStatus.setText("Mafia Status: "+status6);
+      }
+      if(event.getSource()==push7){
+    	 status7 = user7.getStatus();
+         mafiaStatus.setText("Mafia Status: "+status7);
+      }
+      if(event.getSource()==push8){
+    	 status8 = user8.getStatus();
+         mafiaStatus.setText("Mafia Status: "+status8);
+      }
+   }
+   
+   public static void main(String[] args){ //run
+      Application.launch(args);
+   }
+}
