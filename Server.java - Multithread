@@ -10,7 +10,7 @@ public class Server {
 		Socket socket = null;
 		DataInputStream inputStream = null;
 		DataOutputStream out = null;
-		for(int i=1; i<3; i++) {
+		for(int i=1; i<9; i++) {
 			socket = serverSocket.accept();
 			System.out.println("New client is accepted.");
 			
