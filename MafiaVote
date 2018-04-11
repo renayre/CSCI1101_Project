@@ -1,0 +1,144 @@
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import java.util.ArrayList;
+
+public class MafiaVote extends Application{
+//initializing attributes
+   private int count,count1,count2,count3,count4,count5,count6,count7; //keeps track of presses
+   private Text countText;
+   private Text instructions;
+   private Button push, push1, push2, push3, push4, push5, push6, push7;
+   private FlowPane pane;
+   int userCount=5;//use as test- will have to get from server code 
+   String user= "Sasha", user1= "Allie", user2= "Laura", user3= "Kate", user4= "Rey", user5= "E", user6= "Cara", user7= "Jacob" ;
+   
+   @Override
+   public void start(Stage primaryStage){
+      count=0;
+      countText = new Text("Pushes:");//names of players would go here (more text object created)
+      instructions= new Text("Mafia, The three of you have one vote- Choose wisely!");
+      Font font1 = Font.font("Arial", FontWeight.BOLD,20);
+      countText.setFont(font1);
+      instructions.setFont(font1);
+
+//set up the if statements 
+//if (userCount==8){
+   //only provide 8 button options 
+      push = new Button("VOTE " + user);//import user's name for votes 
+      push.setStyle("-fx-font:20 Arial");
+      push.setOnAction(this::processButtonPress);
+      push1 = new Button("VOTE "+ user1);
+      push1.setStyle("-fx-font:20 Arial");
+      push1.setOnAction(this::processButtonPress);
+      push2 = new Button("VOTE " + user2);
+      push2.setStyle("-fx-font:20 Arial");
+      push2.setOnAction(this::processButtonPress);
+      push3 = new Button("VOTE " + user3);
+      push3.setStyle("-fx-font:20 Arial");
+      push3.setOnAction(this::processButtonPress);
+      push4 = new Button("VOTE " + user4);
+      push4.setStyle("-fx-font:20 Arial");
+      push4.setOnAction(this::processButtonPress);
+      push5 = new Button("VOTE " + user5);
+      push5.setStyle("-fx-font:20 Arial");
+      push5.setOnAction(this::processButtonPress);
+      push6 = new Button("VOTE " + user6);
+      push6.setStyle("-fx-font:20 Arial");
+      push6.setOnAction(this::processButtonPress);
+      push7 = new Button("VOTE " + user7);
+      push7.setStyle("-fx-font:20 Arial");
+      push7.setOnAction(this::processButtonPress);
+
+
+      //add display of name
+      Text outUser;
+      if (userCount==7){
+         outUser = new Text(user +" is dead!");
+         outUser.setFont(font1);
+      } else if (userCount==7){
+         outUser = new Text(user + ", and "+ user1 +" are dead!");
+         outUser.setFont(font1);
+      } else if (userCount==6){
+         outUser = new Text(user + ", "+ user1 + ", and " + user2 + " are dead!");
+         outUser.setFont(font1);
+      } else if (userCount==5){
+         outUser = new Text(user + ", "+ user1 + ", " + user2 + ", and " +user3 +" are dead!");
+         outUser.setFont(font1);
+      } else if (userCount==4){
+         outUser = new Text(user + ", "+ user1 + ", " + user2 + ", " +user3 +", and " + user4 +" are dead!");
+         outUser.setFont(font1);
+      } else if (userCount==3){
+         outUser = new Text(user + ", "+ user1 + ", " + user2 + ", " +user3 +", " + user4 + ", and " + user5 +" are dead!");
+         outUser.setFont(font1);
+      } else if (userCount==2){
+         outUser = new Text(user + ", "+ user1 + ", " + user2 + ", " +user3 +", " + user4 + ", " + user5 + ", and " +user6 +" are dead!");
+         outUser.setFont(font1);
+      } else if (userCount==1){
+         outUser = new Text(user + ", "+ user1 + ", " + user2 + ", " +user3 +", " + user4 + ", " + user5 + ", " +user6 + ", and " + user7 +" are dead!");
+         outUser.setFont(font1);
+      } else { 
+         outUser = new Text("No one is dead.... Yet!");
+      }   
+      pane = new FlowPane();
+      pane.setAlignment(Pos.CENTER);
+      pane.setHgap(30);
+      pane.setStyle("-fx-background-color:WHITE");
+      pane.getChildren().addAll(push, push1, push2, push3,push4,push5,push6,push7, instructions, outUser /*countText*/ );
+      instructions.setVisible(true);
+      
+      Scene scene = new Scene(pane, 800, 300);
+      
+      primaryStage.setTitle("Vote to Kill");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+      
+   }
+   
+   //adding to count and ensuring that only able to vote once
+   public void processButtonPress(ActionEvent event){
+      if(event.getSource()==push&&count<1&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0){
+         count++;
+         countText.setText("Pushes: " + count);
+         System.exit(0);//works- should add to all below if statements but check if the arraylist still works
+      } if(event.getSource()==push1&&count==0&&count1<1&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0)
+         count1++;
+         System.exit(0);
+      if(event.getSource()==push2&&count==0&&count1==0&&count2<1&&count3==0&&count4==0&&count5==0&&count6==0&&count7==0)
+         count2++;
+         System.exit(0);
+      if(event.getSource()==push3&&count==0&&count1==0&&count2==0&&count3<1&&count4==0&&count5==0&&count6==0&&count7==0)
+         count3++;
+         System.exit(0);
+      if(event.getSource()==push4&&count==0&&count1==0&&count2==0&&count3==0&&count4<1&&count5==0&&count6==0&&count7==0)
+         count4++;
+         System.exit(0);
+      if(event.getSource()==push5&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5<1&&count6==0&&count7==0)
+         count5++;
+         System.exit(0);
+      if(event.getSource()==push6&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6<1&&count7==0)
+         count6++;
+         System.exit(0);
+      if(event.getSource()==push7&&count==0&&count1==0&&count2==0&&count3==0&&count4==0&&count5==0&&count6==0&&count7<1)
+         count7++; 
+         System.exit(0);
+   }
+   
+   //public String savedUser(){//have to save the variable of who is to be saved from vote
+   //}
+   
+ //run app
+   public static void main(String[] args){
+      Application.launch(args);
+    
+      
+   }
+}
