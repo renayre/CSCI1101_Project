@@ -1,6 +1,6 @@
 /*CSCI 1101 - MAFIA MULTIPLAYER GAME - PROJECT
  * CHARACTER CLASS
- * Elliot, Renayre, Sasha, Allie and Kate */
+ * Eliot, Renayre, Sasha, Allie and Kate */
 public class Character {
 	private String name;
 	private boolean alive;
