@@ -11,17 +11,21 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
-public class Role extends Application{
+public class RoleGUI extends Application{
 
 //initializing attributes
 private Text roleStatement;
 private FlowPane pane;
-String role="Doctor";//defualt - import from class
-String user= "Sasha";
+private String role;
+
+public RoleGUI() {}
+public void setrole(String r) {
+	role=r;
+}
 
 @Override
    public void start(Stage primaryStage){
-   roleStatement = new Text(user + " you are a " + role + " this game!");
+   roleStatement = new Text("You are a " + role + " in this game!");
    Font font1 = Font.font("Arial", FontWeight.BOLD,20);
    roleStatement.setFont(font1);
    
@@ -39,10 +43,5 @@ String user= "Sasha";
       primaryStage.show();
       
    }
-   
-   public static void main(String[] args){
-      Application.launch(args);
-    
-      
-   }
+
 }
