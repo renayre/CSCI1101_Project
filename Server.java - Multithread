@@ -2,22 +2,10 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.text.Text;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.text.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
-
 public class Server {
 	public static void main(String[] args) throws IOException {	
 		//server socket for client trying port #
-		ServerSocket serverSocket = new ServerSocket(9003);
+		ServerSocket serverSocket = new ServerSocket(9013);
 		System.out.println("Server Socket Created.");
 		//socket object to read in new client requests
 		Socket socket = null;
@@ -48,6 +36,14 @@ class ClientHandler extends Thread{
 	private Game game;
 	private ArrayList<Character> players = game.getPlayers();
 	private ArrayList <Integer> role = new ArrayList<Integer>();
+	protected Character c1 = new Character();
+	private Character c2 = new Character();
+	private Character c3 = new Character();
+	private Character c4 = new Character();
+	private Character c5 = new Character();
+	private Character c6 = new Character();
+	private Character c7 = new Character();
+	private Character c8 = new Character();
 	
 	//constructor
 	public ClientHandler(DataInputStream is, DataOutputStream out, Socket s, String name) {
@@ -59,9 +55,8 @@ class ClientHandler extends Thread{
 	
 	@Override
 	public void run() {
-		String name1, name2, name3, name4, name5, name6, name7, name8;
+		String name1 = " ", name2 = " ", name3 = " ", name4 = "", name5 = "", name6 = "", name7 = "", name8 = "";
 		String send;
-		Character c1=null, c2=null, c3=null, c4=null, c5=null, c6=null, c7=null, c8=null;
 		game = new Game(players);
 		
 		//ask user's name
@@ -78,6 +73,7 @@ class ClientHandler extends Thread{
 				c1.setName(name1);
 				c1.setRole(role.get(0));
 				role.remove(0);
+				out.writeUTF(c1.getRole());	
 				
 			}
 			if(name.equals("Thread2")) {
@@ -128,8 +124,7 @@ class ClientHandler extends Thread{
 				c8.setName(name8);
 				c8.setRole(role.get(0));
 				role.remove(0);
-			}
-			
+			}	
 			
 		} 
 		catch (IOException e1) {
