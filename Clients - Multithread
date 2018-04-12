@@ -2,24 +2,29 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-public class MultiThreadClient {
-        public static void main(String[] args) throws IOException{
-                Scanner kb = new Scanner(System.in);
-                System.out.println("Client called.");
-                        //create new socket 
-                        Socket socket = new Socket("134.190.132.214", 8999);
-                        System.out.println("Socket Created");
-                        
-                        //to send data to server
-                        DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-                        //to get data from server
-                        DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-                        
-                        //send to and receive from client handler
-                        System.out.println(inputStream.readUTF());
-                        String sendTo = kb.nextLine();
-                        outputStream.writeUTF(sendTo);
-        }
+public class Client {
+	public static void main(String[] args) throws IOException{
+		Scanner kb = new Scanner(System.in);
+		System.out.println("Client called.");
+			//create new socket 
+			Socket socket = new Socket("134.190.132.214", 9013);
+			System.out.println("Socket Created");
+			
+			//to send data to server
+			DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+			//to get data from server
+			DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+			
+			//send to and receive from client handler
+			System.out.println(inputStream.readUTF());
+			String sendTo = kb.nextLine();
+			outputStream.writeUTF(sendTo);
+			String role = inputStream.readUTF();
+			System.out.println(role);
+			RoleGUI r=new RoleGUI();
+			r.setrole(role);
+			Application.launch(RoleGUI.class, args);
+	}
 }
 
 class Clientt2 {
