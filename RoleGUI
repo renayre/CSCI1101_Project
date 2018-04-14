@@ -10,22 +10,36 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
 
 public class RoleGUI extends Application{
-
+ 
 //initializing attributes
-private Text roleStatement;
+private Text roleStatement = new Text("didnt work");
 private FlowPane pane;
 private String role;
 
 public RoleGUI() {}
-public void setrole(String r) {
-	role=r;
+
+public void setrole() {
+	//role = r;
+	roleStatement.setText("it worked");//figure this out
 }
 
 @Override
    public void start(Stage primaryStage){
-   roleStatement = new Text("You are a " + role + " in this game!");
+   try {
+	   FileReader file = new FileReader("Role.txt");
+	   BufferedReader reader = new BufferedReader(file);
+	   role = reader.readLine();
+	   reader.close();
+   } catch (FileNotFoundException e) {
+	e.printStackTrace();
+   } catch (IOException e) {
+	e.printStackTrace();
+   }
+   roleStatement.setText("You are a " + role + " in this game!");
    Font font1 = Font.font("Arial", FontWeight.BOLD,20);
    roleStatement.setFont(font1);
    
@@ -42,6 +56,6 @@ public void setrole(String r) {
       primaryStage.setScene(scene);
       primaryStage.show();
       
-   }
+   } 
 
 }
