@@ -1,0 +1,66 @@
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
+
+public class RoleGUI extends Application{
+ 
+//initializing attributes
+private Text roleStatement = new Text("didnt work");
+private FlowPane pane;
+private String role;
+
+public RoleGUI() {}
+
+public void setrole(String r) {
+	role = r;
+	roleStatement.setText("it worked");//figure this out
+	System.out.println("Role = " + r);
+}
+
+@Override
+   public void start(Stage primaryStage){
+   try {
+	   
+	   FileReader file = new FileReader("Role.txt");
+	   Scanner reader = new Scanner(file);//BufferedReader reader = new BufferedReader(file);
+	   while(reader.hasNext()) {
+	   role = reader.nextLine();
+	   roleStatement.setText("Role:" + role);
+	   }
+	   reader.close();
+	   
+   } catch (FileNotFoundException e) {
+	e.printStackTrace();
+   } catch (IOException e) {
+	e.printStackTrace();
+   }
+   
+   
+   Font font1 = Font.font("Arial", FontWeight.BOLD,20);
+   roleStatement.setFont(font1);
+   
+   pane = new FlowPane();
+   pane.setAlignment(Pos.CENTER);
+   pane.setHgap(30);
+   pane.setStyle("-fx-background-color:WHITE");
+   pane.getChildren().addAll(roleStatement);
+   roleStatement.setVisible(true);
+   
+   Scene scene = new Scene(pane, 800, 300);
+      
+      primaryStage.setTitle("Role Placement");
+      primaryStage.setScene(scene);
+      primaryStage.show();
+	}	
+}
