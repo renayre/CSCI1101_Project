@@ -44,7 +44,7 @@ public class GameDemo {
 		
 		new Game(players);
 		//tellRole(c.getName(),c.getRole());
-		
+		//WE CAN PUT THIS IN A MASSIVE WHILE LOOP. WHILE THE PLAYERS REMAINING ARE NOT ALL MAFIA OR ALL TOWN
 		//doctor
 		if(currRole.equals("Doctor")) {
 		    JFrame frame = new JFrame("Doctor - Night Phase");
