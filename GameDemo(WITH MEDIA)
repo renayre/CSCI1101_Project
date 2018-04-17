@@ -1,12 +1,13 @@
+/*MAFIA GAME - KATE, REY, ELIOT, ALLIE, SASHA*/
 import java.util.Scanner;
+import java.util.Queue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
-import java.io.File;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import java.util.LinkedList;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -21,18 +22,12 @@ import javafx.stage.Stage;
 
 //import java.util.Random;
 
-public class GameDemo extends Application {
-	//media player for mp3s
-	MediaPlayer mediaplayer;
-	
+public class GameDemo {
 	public static void main(String[]args) {
-		//for mp3 files 
-		launch(args);
-		
 		Scanner kb = new Scanner(System.in);
-		//ArrayList<Integer> vote = new ArrayList<Integer>(); //maybe
-		ArrayList<Character> players = Game.getPlayers();//server?
-		//ArrayList<Character> mafia = new ArrayList<Character>(); //server?
+		public static ArrayList<Character> votes = new ArrayList<Character>(); //maybe
+		ArrayList<Character> players = new ArrayList<Character>();
+		Queue<Character> mafia = new LinkedList();
 		ArrayList <Integer> role = new ArrayList<Integer>();
 		
 		//adds numbs to arrayList
@@ -41,14 +36,22 @@ public class GameDemo extends Application {
 		}
 		//intake
 		//restate in chat and game
-		System.out.print("Please enter your name: ");
-		String name = kb.next();
-		Character c = new Character(); //create empty
-		c.setName(name);
-		c.setRole(role.get(0));
-		String currRole = c.getRole();
-		role.remove(0);
-		
+		for(int i=1; i<=8; i++) {
+			System.out.print("Please enter your name: ");
+			String name = kb.next();
+			Character c = new Character(); //create empty
+			c.setName(name);
+			c.setRole(role.get(0));
+			System.out.println("Please enter your password: ");
+			String password = kb.next();
+			c.setPassword(password);
+			String currRole = c.getRole();
+			role.remove(0);
+			players.add(c);
+			if (currRole == "Mafia") {
+				mafia.add(c);
+			}
+		}
 		
 		new Game(players);
 		//tellRole(c.getName(),c.getRole());
