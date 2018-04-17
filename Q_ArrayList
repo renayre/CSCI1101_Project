@@ -1,0 +1,28 @@
+/*MAFIA - ALLIE, REY, ELIOT, SASHA AND KATE
+ TAKEN FROM CLASS NOTES*/
+
+
+import java.util.ArrayList;
+
+public class Q_ArrayList {
+	private ArrayList<Character>Q;
+	public Q_ArrayList() {
+	}
+	public boolean isEmpty() {
+		if(Q.get(0) == null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public void enqeue(Character c) {
+		Q.add(c);
+	}
+	public void dequeue(Character c) {
+		Q.remove(c);
+	}
+	public Character peek() {
+		return Q.get(0);
+	}
+}
