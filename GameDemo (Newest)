@@ -60,7 +60,7 @@ public class GameDemo {
 
 	}
 	//method for mafia's vote at night
-	public static void mafiaNight(ArrayList<Character> players) {
+	/*public static void mafiaNight(ArrayList<Character> players) {
 		JFrame frame = new JFrame("Mafia - Night Phase");
 		String[] options = new String[players.size()];
 		
@@ -72,7 +72,7 @@ public class GameDemo {
         for(int i=0; i<players.size(); i++) {
         	if(players.get(i).getName())
         }
-	}
+	}*/
 	//method for police's actions at night
 	public static void policeNight(ArrayList<Character> players) {
 		JFrame frame = new JFrame("Police - Night Phase");
