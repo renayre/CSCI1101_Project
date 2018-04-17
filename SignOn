@@ -1,0 +1,24 @@
+public static void signOn(ArrayList<Character> players) {
+		Panel panel = new Panel();
+    //converts passed in array list to an arry for the drop down to use 
+		Character[] players_updated = players.toArray(new Character[players.size()]);
+		JFrame frame = new JFrame();
+		JPanel label = new JPanel(new GridLayout(0,1,2,2));
+		
+		//Dropdown for username is a seperate box than password box
+		Character input2 = (Character) JOptionPane.showInputDialog(null, "Who you??", "Sign in", JOptionPane.QUESTION_MESSAGE, null, players_updated, players_updated[0]);
+	
+		label.add(new JLabel("Password"));
+		panel.add(label);
+		
+		JPanel controls = new JPanel(new GridLayout(0,1,2,2));
+		JPasswordField password = new JPasswordField(10);
+		controls.add(password);
+		panel.add(controls, BorderLayout.CENTER);
+		
+		JOptionPane.showMessageDialog(frame,  panel, "login", JOptionPane.QUESTION_MESSAGE);
+		 
+		//prints out username and password, password is just the memory location but we do not need to print the actual password
+		System.out.println("Username: " +input2);
+		System.out.println("Password: " + password.getPassword());
+	}
