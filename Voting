@@ -1,0 +1,19 @@
+//EXECUTION VOTING CLASS
+
+package ServerMultiTest;
+import javax.swing.JOptionPane;
+
+public class Voting {
+	creating players just for this class
+  protected static Character P1 = new Character("jack","police");
+	protected static Character P2 = new Character("lizzy","townspeople");
+	protected static Character P3 = new Character("geoff","mafia");
+	
+	public static void main(String[] args) {
+		//Array list of current alive players 
+		Character[] Players = {P1,P2,P3};
+		//literally the whole option pane
+		Character input = (Character) JOptionPane.showInputDialog(null, "Choose who to execute:", "Execution Voting", JOptionPane.QUESTION_MESSAGE, null, Players, Players[0]);
+		System.out.println(input);
+	}
+}
