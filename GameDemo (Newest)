@@ -1,10 +1,9 @@
-import java.util.Scanner;
+/*MAFIA GAME - KATE, REY, ELIOT, ALLIE, SASHA*/
 
+import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -17,15 +16,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-//import java.util.Random;
+import java.util.Random;
 
 public class GameDemo {
 	public static void main(String[]args) {
 		Scanner kb = new Scanner(System.in);
-		//ArrayList<Integer> vote = new ArrayList<Integer>(); //maybe
-		ArrayList<Character> players = Game.getPlayers();//server?
-		//ArrayList<Character> mafia = new ArrayList<Character>(); //server?
-		ArrayList <Integer> role = new ArrayList<Integer>();
+		ArrayList<Character> players = Game.getPlayers();
+		ArrayList<Integer> role = new ArrayList<Integer>(); //holds the roles so there's the same amount everytime
 		
 		//adds numbs to arrayList
 		for(int i=1; i<=8;i++) {
@@ -39,47 +36,48 @@ public class GameDemo {
 		c.setName(name);
 		c.setRole(role.get(0));
 		String currRole = c.getRole();
+		players.add(c);
 		role.remove(0);
 		
 		
 		new Game(players);
 		//tellRole(c.getName(),c.getRole());
-		//WE CAN PUT THIS IN A MASSIVE WHILE LOOP. WHILE THE PLAYERS REMAINING ARE NOT ALL MAFIA OR ALL TOWN
+		
 		//doctor
 		if(currRole.equals("Doctor")) {
 		    JFrame frame = new JFrame("Doctor - Night Phase");
-	        String[] options = null;
+	        String[] options = new String[8];
 	        
-	        for(int i=0; i<8; i++) { // set the options to each player's name
+	        for(int i=0; i<players.size(); i++) { // set the options to each player's name
 	        	options[i] = players.get(i).getName();
 	        }
 	        String nameOfSafe;
-	        nameOfSafe = (String)JOptionPane.showInputDialog(frame, "Who would like to protect tonight?", "Doctor - Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[8]); //dropdown
+	        nameOfSafe = (String)JOptionPane.showInputDialog(frame, "Who would like to protect tonight?", "Doctor - Night Phase", JOptionPane.QUESTION_MESSAGE, null, options,options[0]); //dropdown
+	        //question, header, jOptionPane, arrayOfChoices, initial choice
 		    for(int i=0;i<players.size();i++) {
 		    	if(players.get(i).getName().equals(nameOfSafe))
 		    		players.get(i).setSafe(true); //saves the one player
 		    	else
 		    		players.get(i).setSafe(false); //makes everyone else vulnerable
 		    }
-		    System.exit(0);
 		    
 		    //sends pane saying that it was done
 		    JFrame done = new JFrame();  
 		    JOptionPane.showMessageDialog(done,(nameOfSafe+" has been protected for the night."));  //reconfirms that that player has been saved
 		    
-		    System.exit(0);
+		   System.exit(0);
 		}
 		
 		//police
 		if(currRole.equals("Police")) {
 		    JFrame frame = new JFrame("Police - Night Phase");
-	        String[] options = null;
+	        String[] options = new String [8];
 	        
 	        for(int i=0; i<8; i++) { // set the options to each player's name
 	        	options[i] = players.get(i).getName();
 	        }
 	        String nameOfInvest; Character investee = null;
-	        nameOfInvest = (String)JOptionPane.showInputDialog(frame, "Who would like to investigate tonight?", "Police - Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[8]); //dropdown
+	        nameOfInvest = (String)JOptionPane.showInputDialog(frame, "Who would like to investigate tonight?", "Police - Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[0]); //dropdown
 		    for(int i=0;i<players.size();i++) {
 		    	if(players.get(i).getName().equals(nameOfInvest))
 		    		investee = players.get(i);
@@ -89,11 +87,11 @@ public class GameDemo {
 		    JFrame investResult = new JFrame();  
 		    if(investee.getIsMafia()==false) {
 		    	JOptionPane.showMessageDialog(investResult,(investee.getName()+" is a member of the mafia.")); 
-		    	System.exit(0);
+		    	//System.exit(0);
 		    }
 		    else {
 		    	JOptionPane.showMessageDialog(investResult,(investee.getName()+" is not a member of the mafia.")); 
-		    	System.exit(0);
+		    	//System.exit(0);
 		    }
 		  }
 	}
