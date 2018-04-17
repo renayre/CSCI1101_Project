@@ -54,10 +54,80 @@ public class GameDemo {
 		
 		
 		Game game = new Game(players);
-		//tellRole(c.getName(),c.getRole());
-		//WE CAN PUT THIS IN A MASSIVE WHILE LOOP. WHILE THE PLAYERS REMAINING ARE NOT ALL MAFIA OR ALL TOWN
-		//doctor
-
+//add while loop for WHILE THE MAFIA QUEUE ISN"T EMPTY or while only mafia left
+			//add night phase GUI
+			for(int i=0; i<players.size(); i++) {
+				String attempt1 = JOptionPane.showInputDialog(players.get(i).getName() + " please enter your password to take your turn.");
+				//if they get their password wrong
+				while(attempt1!=players.get(0).getPassword()) {
+					attempt1 = JOptionPane.showInputDialog(players.get(i).getName() + " looks like you input the wrong password! Please enter your password to take your turn.");
+				}
+				//when mafiaNight() method is called, to count up mafia votes
+				if(players.get(i).getRole().equals("Mafia")) {
+					mafiaNight(players, mafiaVote);
+					int count =0, most =0;
+					Character mostVotes = null; boolean safe = false;
+					for(int k=0; k<players.size();k++) {
+						for(int j=0; j<mafiaVote.size(); j++) {
+							if(mafiaVote.get(j).getName().equals(players.get(k).getName())) {
+								count++;
+							}
+						}
+						if(count>most) {
+							most=count;
+							mostVotes = players.get(i);
+						}
+						else {}
+					}
+					//check to make sure the person with the most votes isn't safe
+					if(!mostVotes.getSafe()) {
+						mostVotes.setAlive(false);
+						players.remove(mostVotes);
+					}
+					else {
+						safe = true;
+					}
+					mafiaVote.clear();
+				}
+				else if(players.get(i).getRole().equals("Doctor")) {
+					doctorNight(players);
+				}
+				else if(players.get(i).getRole().equals("Police")) {
+					policeNight(players);
+				}
+				//when all vote, figure out who gets murdered
+				int counter=0, most2=0;
+				Character mostVotes2 = null; safe = false;
+				for(int k=0; k<players.size();k++) {
+					for(int j=0; j<vote.size(); j++) {
+						if(vote.get(j).getName().equals(players.get(k).getName())) {
+							counter++;
+						}
+					}
+					if(counter>most2) {
+						most2=counter;
+						mostVotes2 = players.get(k);
+					}
+					else {}
+				}
+				//check to make sure the person with the most votes isn't safe
+				if(!mostVotes2.getSafe()) {
+					mostVotes2.setAlive(false);
+					players.remove(mostVotes2);
+				}
+				else {
+					safe = true;
+				}
+				vote.clear();
+			}
+			//ask to play another round
+			if(JOptionPane.showConfirmDialog(null, "Play again?", "Play again?", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+				keepPlaying = true;
+			}
+			else 
+				keepPlaying = false;
+		}
+		System.out.println("Thanks for playing!");
 	}
 	//method for mafia's vote at night
 	/*public static void mafiaNight(ArrayList<Character> players) {
