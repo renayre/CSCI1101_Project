@@ -25,9 +25,9 @@ import javafx.stage.Stage;
 public class GameDemo {
 	public static void main(String[]args) {
 		Scanner kb = new Scanner(System.in);
-		public static ArrayList<Character> votes = new ArrayList<Character>(); //maybe
+		ArrayList<Character> votes = new ArrayList<Character>(); //maybe
 		ArrayList<Character> players = new ArrayList<Character>();
-		Queue<Character> mafia = new LinkedList();
+		Q_ArrayList mafia = new Q_ArrayList();
 		ArrayList <Integer> role = new ArrayList<Integer>();
 		
 		//adds numbs to arrayList
@@ -49,7 +49,7 @@ public class GameDemo {
 			role.remove(0);
 			players.add(c);
 			if (currRole == "Mafia") {
-				mafia.add(c);
+				mafia.enqeue(c);
 			}
 		}
 		
