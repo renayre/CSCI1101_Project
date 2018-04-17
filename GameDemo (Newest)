@@ -224,4 +224,8 @@ public class GameDemo extends Application {
 	    JFrame thanks = new JFrame(); 
 	    	JOptionPane.showMessageDialog(thanks,("You have successfully voted for "+hang.getName())); 
 	    }
+	    	//for when the civilians don't need to do anything 
+	public static void fake() {
+		JOptionPane.showConfirmDialog(null, "Civilians don't do anything at night! But don't let your opponents know!");
+	}
  }
