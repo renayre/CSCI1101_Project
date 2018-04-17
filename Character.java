@@ -24,7 +24,7 @@ public class Character {
 	//GET METHODS
 	public String getName() {return name;}
 	public boolean getAlive() {return alive;}
-	public Role getRole() {return role;}
+	public String getRole() {return role;}
 	public int getVotesAgainst() {return votesAgainst;}
 	public boolean getSafe() {return safe;}
 	public boolean getIsMafia() {return isMafia;}
