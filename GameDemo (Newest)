@@ -88,11 +88,11 @@ public class GameDemo {
 	    JFrame investResult = new JFrame();  
 	    if(investee.getIsMafia()==false) {
 	    	JOptionPane.showMessageDialog(investResult,(investee.getName()+" is a member of the mafia.")); 
-	    	System.exit(0);
+	    	//System.exit(0);
 	    }
 	    else {
 	    	JOptionPane.showMessageDialog(investResult,(investee.getName()+" is not a member of the mafia.")); 
-	    	System.exit(0);
+	    	//System.exit(0);
 	    }
 	}
 	//method for doctor's actions at night
@@ -111,13 +111,32 @@ public class GameDemo {
 	    	else
 	    		players.get(i).setSafe(false); //makes everyone else vulnerable
 	    }
-	    System.exit(0);
+	    //System.exit(0);
 	    
 	    //sends pane saying that it was done
 	    JFrame done = new JFrame();  
 	    JOptionPane.showMessageDialog(done,(nameOfSafe+" has been protected for the night."));  //reconfirms that that player has been saved
 	    
-	    System.exit(0);
+	    //System.exit(0);
 	}
+	//Everyone daytime voting
+		public static void Voting (ArrayList<Character>players, ArrayList<Character>votes) {
+		JFrame frame = new JFrame("Voting Phase");
+        String[] options = new String[players.size()];
+        
+        for(int i=0; i<players.size(); i++) { // set the options to each player's name
+        	options[i] = players.get(i).getName();
+        }
+        String exe; Character hang= null;
+        exe = (String)JOptionPane.showInputDialog(frame, "Who do you think the town should hang?", "Voting Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[0]); //dropdown
+	    for(int i=0;i<players.size();i++) {
+	    	if(players.get(i).getName().equals(exe))
+	    		hang = players.get(i);
+	    		votes.add(hang);
+	    }
+	    //sends pane confirms
+	    JFrame thanks = new JFrame(); 
+	    	JOptionPane.showMessageDialog(thanks,("You have successfully voted for "+hang.getName())); 
+	    }
 	//method for everyone to vote who mafia 
 }
