@@ -49,12 +49,12 @@ public class GameDemo {//extends Application {
     			String name = JOptionPane.showInputDialog(frame, "Enter your desired username", "Create Character", JOptionPane.WARNING_MESSAGE);
     			c.setName(name);
     			c.setRole(role.get(0));
-    			System.exit(0);
+    			//System.exit(0);
     		
     			JFrame frame2 = new JFrame("Create Character");
     			String pw = JOptionPane.showInputDialog(frame2, "Enter your desired password", "Create Character", JOptionPane.WARNING_MESSAGE);
     			c.setPassword(pw);
-    			System.exit(0);
+    			//System.exit(0);
 				String currRole = c.getRole();
 				role.remove(0);
 				players.add(c);
