@@ -44,7 +44,7 @@ public class GameDemo {//extends Application {
 			}
 			//intake
 			//restate in chat and game
-			for(int i=1; i<=8; i++) {;
+			for(int i=1; i<=8; i++) {
 				Character c = new Character();
 				JFrame frame = new JFrame("Create Character");
     			String name = JOptionPane.showInputDialog(frame, "Enter your desired username", "Create Character", JOptionPane.WARNING_MESSAGE);
