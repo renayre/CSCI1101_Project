@@ -1,0 +1,152 @@
+import javafx.application.Application;
+import javafx.scene.control.*;
+import javafx.geometry.Pos;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.shape.*;
+import javafx.scene.text.Text;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+public class Night extends Application {
+@Override
+public void start(Stage stage){
+   GridPane pane= new GridPane();
+   pane.setStyle("-fx-background-color:DARKBLUE");
+ 
+   //add house images 
+   ImageView viewer= new ImageView();
+   Image image= new Image(Day.class.getResourceAsStream("houses.png"));
+   viewer.setImage(image);
+   viewer.setFitHeight(80);
+   viewer.setFitWidth(150);
+   ImageView viewer1= new ImageView();
+   Image image1= new Image(Day.class.getResourceAsStream("houses2.png"));
+   viewer1.setImage(image1);
+   viewer1.setFitHeight(80);
+   viewer1.setFitWidth(250);
+   
+   //cloud images
+   ImageView viewer2= new ImageView();
+   Image cloud= new Image(Day.class.getResourceAsStream("Star.png"));
+   viewer2.setImage(cloud);
+   viewer2.setFitHeight(50);
+   viewer2.setFitWidth(50);
+
+   ImageView viewer3= new ImageView();
+   viewer3.setImage(cloud);
+   viewer3.setFitHeight(60);
+   viewer3.setFitWidth(60);
+   
+   ImageView viewer4= new ImageView();
+   viewer4.setImage(cloud);
+   viewer4.setFitHeight(50);
+   viewer4.setFitWidth(50);
+   
+   //images for the people
+   ImageView viewer5= new ImageView();
+   Image people= new Image(Day.class.getResourceAsStream("PeoplePeople.png"));
+   viewer5.setImage(people);
+   viewer5.setFitHeight(80);
+   viewer5.setFitWidth(68);
+
+   //create a circle for moon
+   Circle circle=new Circle();
+   circle.setRadius(40);
+   circle.setFill(Color.WHITE);
+   
+   //create a rectangle for grass
+   Rectangle rectangle= new Rectangle();
+   rectangle.setHeight(100);
+   rectangle.setWidth(270);
+   rectangle.setFill(Color.GREEN);
+   
+   Rectangle rectangle1= new Rectangle();
+   rectangle1.setHeight(100);
+   rectangle1.setWidth(270);
+   rectangle1.setFill(Color.GREEN);
+   
+   Rectangle rectangle2= new Rectangle();
+   rectangle2.setHeight(100);
+   rectangle2.setWidth(270);
+   rectangle2.setFill(Color.GREEN);
+   
+   //rectangle for sky
+   Rectangle rectangleblue= new Rectangle();
+   rectangleblue.setHeight(40);
+   rectangleblue.setWidth(200);
+   rectangleblue.setFill(Color.DARKBLUE);
+  
+   Rectangle rectangleblue1= new Rectangle();
+   rectangleblue1.setHeight(40);
+   rectangleblue1.setWidth(200);
+   rectangleblue1.setFill(Color.DARKBLUE);
+
+   Rectangle rectangleblue2= new Rectangle();
+   rectangleblue2.setHeight(40);
+   rectangleblue2.setWidth(200);
+   rectangleblue2.setFill(Color.DARKBLUE);
+   
+   Rectangle rectangleblue3= new Rectangle();
+   rectangleblue3.setHeight(80);
+   rectangleblue3.setWidth(200);
+   rectangleblue3.setFill(Color.DARKBLUE);
+  
+   Rectangle rectangleblue4= new Rectangle();
+   rectangleblue4.setHeight(80);
+   rectangleblue4.setWidth(200);
+   rectangleblue4.setFill(Color.DARKBLUE);
+
+   Rectangle rectangleblue5= new Rectangle();
+   rectangleblue5.setHeight(80);
+   rectangleblue5.setWidth(200);
+   rectangleblue5.setFill(Color.DARKBLUE);
+   
+   Rectangle rectangleblue6= new Rectangle();
+   rectangleblue2.setHeight(40);
+   rectangleblue2.setWidth(200);
+   rectangleblue2.setFill(Color.DARKBLUE);
+   
+   Rectangle rectangleblue7= new Rectangle();
+   rectangleblue3.setHeight(80);
+   rectangleblue3.setWidth(200);
+   rectangleblue3.setFill(Color.DARKBLUE);
+
+
+   //add to grid pane 
+   pane.add(circle,0,0);
+   pane.add(viewer,0,4);
+   pane.add(viewer1,1,4);
+   pane.add(viewer2,1,2);
+   pane.add(viewer3,0,3);
+   pane.add(viewer4,2,2);
+   pane.add(rectangleblue,0,1);
+   pane.add(rectangleblue1,1,1);
+   pane.add(rectangleblue2,2,1);
+   pane.add(rectangleblue3,0,2);
+   pane.add(rectangleblue4,1,3);
+   pane.add(rectangleblue5,2,3);
+   pane.add(rectangleblue6,1,3);
+   pane.add(rectangleblue7,2,3);
+   pane.add(rectangle,0,5);
+   pane.add(rectangle1,1,5);
+   pane.add(rectangle2,2,5);
+   
+   Scene scene= new Scene(pane,600,400);
+   stage.setTitle("It is night time- Be careful!");
+   stage.setScene(scene);
+   stage.setResizable(false);
+   stage.show();
+ }
+public static void main(String[] args){
+   Application.launch(args);
+}
+}      
+   
