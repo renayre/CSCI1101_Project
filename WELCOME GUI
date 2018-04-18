@@ -11,6 +11,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.AudioClip;
+import java.io.File;
 
 public class WelcomeToMafia extends Application{
       
@@ -19,11 +21,12 @@ public void start(Stage stage){
    GridPane pane= new GridPane();
    pane.setStyle("-fx-background-color:LIGHTBLUE");
    
-   //create button, text and listener
-   Button button= new Button("LETS PLAY!");
-   button.setStyle("-fx-font:15 Arial");
-   button.setPrefSize(600,30);
-   button.setOnAction(this::processButtonPress);
+   //create sound 
+   String Music = "Law & Order.mp3";    
+	AudioClip LawandOrder = new AudioClip(new File(Music).toURI().toString());
+    
+
+   // create text 
    Text text= new Text("Welcome to the game of Mafia! Today you and 7 other users are entering the world\n that is Mafia." + 
    "Three of you will become the mafia, one of you will be chosen to\n become the town doctor, another the policeman! The" + 
    " rest of you will be towns \n people.Within these roles you are to work with as well as against one another to \n figure" + 
@@ -39,19 +42,18 @@ public void start(Stage stage){
    text.setFont(font1);
 
    pane.add(text, 0, 0);
-   pane.add(button, 0, 1);
    
-   Scene scene= new Scene(pane,600,323);
+   Scene scene= new Scene(pane,605,275);
    stage.setTitle("Welcome- How you play!");
    stage.setScene(scene);
+   LawandOrder.play();
    stage.show();
 
   }
-   public void processButtonPress(ActionEvent event){
-      System.exit(0);
-   } 
+ 
   public static void main(String[] args) {
         Application.launch(args);
     }
     
 }
+
