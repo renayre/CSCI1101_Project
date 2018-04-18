@@ -30,7 +30,7 @@ public class GameDemo {//extends Application {
 		ArrayList<Character> vote = new ArrayList<Character>(); 
 		ArrayList<Character> mafiaVote = new ArrayList<Character>();
 		ArrayList<Character> players = new ArrayList<Character>();
-		//ArrayList<Character> mafia = new ArrayList<Character>(); 
+		Q_ArrayList  mafia = new Q_ArrayList(); 
 		ArrayList <Integer> role = new ArrayList<Integer>();
 		boolean keepPlaying = true;
 		boolean safe = false;
@@ -57,6 +57,10 @@ public class GameDemo {//extends Application {
 				String currRole = c.getRole();
 				role.remove(0);
 				players.add(c);
+				
+				if(currRole == "Mafia") {
+					mafia.enqeue(c);
+				}
 			}
          for(int i=0; i<players.size(); i++){
             System.out.println(players.get(i));
