@@ -1,5 +1,5 @@
+/*SASHA, ALLIE, KATE, REY, ELIOT*/
 
-/*MAFIA GAME - KATE, REY, ELIOT, ALLIE, SASHA*/
 import java.util.Scanner;
 
 import javax.swing.JFrame;
@@ -8,36 +8,41 @@ import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.shape.*;
 import javafx.scene.text.Text;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import java.io.File;
 
 //import java.util.Random;
 
-public class GameDemo {//extends Application {
+public class GameDemo {
 	public static void main(String[]args) {
 		Scanner kb = new Scanner(System.in);
 		ArrayList<Character> vote = new ArrayList<Character>(); 
 		ArrayList<Character> mafiaVote = new ArrayList<Character>();
 		ArrayList<Character> players = new ArrayList<Character>();
-		Q_ArrayList  mafia = new Q_ArrayList(); 
 		ArrayList <Integer> role = new ArrayList<Integer>();
+      ArrayList<Character> townies = new ArrayList<Character>();
 		boolean keepPlaying = true;
 		boolean safe = false;
+		Q_ArrayList mafia = new Q_ArrayList();
 		boolean day = false; //updates to false during nightPhase
 		boolean win = false; //if win conditions are met
 
-		while(keepPlaying) {
+		while(keepPlaying==true) {
 			//adds numbs to arrayList to assign roles
 			for(int i=1; i<=8;i++) {
 				role.add(i);
@@ -47,43 +52,38 @@ public class GameDemo {//extends Application {
 			for(int i=1; i<=8; i++) {
 				Character c = new Character();
 				JFrame frame = new JFrame("Create Character");
-    			String name = JOptionPane.showInputDialog(frame, "Enter your desired username", "Create Character", JOptionPane.WARNING_MESSAGE);
-    			c.setName(name);
-    			c.setRole(role.get(0));
+    				String name = JOptionPane.showInputDialog(frame, "Enter your desired username (can't be the same as another player)", "Create Character", JOptionPane.WARNING_MESSAGE);
+               c.setName(name);
+    				c.setRole(role.get(0));
+    				c.setAlive(true);
     		
-    			JFrame frame2 = new JFrame("Create Character");
-    			String pw = JOptionPane.showInputDialog(frame2, "Enter your desired password", "Create Character", JOptionPane.WARNING_MESSAGE);
-    			c.setPassword(pw);
-    			
-    			c.setAlive(true);
-    			//System.exit(0);
-				String currRole = c.getRole();
-				role.remove(0);
-				players.add(c);
-				
-				if(currRole == "Mafia") {
-					mafia.enqeue(c);
-				}
+    				JFrame frame2 = new JFrame("Create Character");
+    				String pw = JOptionPane.showInputDialog(frame2, "Enter your desired password", "Create Character", JOptionPane.WARNING_MESSAGE);
+    				c.setPassword(pw);
+				   String currRole = c.getRole();
+				   role.remove(0);
+				   players.add(c);
+				   if(currRole.equals("Mafia")) {
+					   mafia.enqueue(c);
+				   }
+               else
+                  townies.add(c);
 			}
-         for(int i=0; i<players.size(); i++){
-            System.out.println(players.get(i));
-			}
-     
          
-          boolean mafiaOrTownWin = players.get(0).getIsMafia(); //if they all match they all are the same statuss
-
-			Game game = new Game(players);
-			while(win==false) {
-			//add night phase GUI
+			while(!win) {
+			//Application.launch(Night.class, args);//nighttime GUI
 			for(int i=0; i<players.size(); i++) {
-				String attempt1 = JOptionPane.showInputDialog(players.get(i).getName() + " please enter your password to take your turn.");
+				String attempt1 = JOptionPane.showInputDialog(players.get(i).getName() + " please enter your password to take your turn."+players.get(i).getPassword());
 				//if they get their password wrong
-				while(attempt1!=players.get(i).getPassword()) {
+				while(!attempt1.equals(players.get(i).getPassword())) {
 					attempt1 = JOptionPane.showInputDialog(players.get(i).getName() + " looks like you input the wrong password! Please enter your password to take your turn.");
-				}
+				}     
 				//when mafiaNight() method is called, to count up mafia votes
-				if(players.get(i).getRole().equals("Mafia")) {
+				if(players.get(i).getRole().equals("Mafia") && mafia.get(i).getName().equals(players.get(0).getName())) {
 					mafiaNight(players, mafiaVote);
+				}
+				else if(players.get(i).getRole().equals("Mafia") && !mafia.get(i).getName().equals(players.get(0).getName())) {
+					fakeMafia();
 				}
 				else if(players.get(i).getRole().equals("Doctor")) {
 					doctorNight(players);
@@ -95,75 +95,93 @@ public class GameDemo {//extends Application {
 					fake();
 				}
 			}
-			int count =0, most =0;
-			Character mostVotes = null; safe = false;
-			for(int k=0; k<players.size();k++) {
-				for(int j=0; j<mafiaVote.size(); j++) {
-					if(mafiaVote.get(j).getName().equals(players.get(k).getName())) {
-						count++;
-					}
-				}
-				if(count>most) {
-					most=count;
-					mostVotes = players.get(k);
-				}
-				else {}
-			}
+			//update the queue so the next mafia gets to vote next round
+			mafia.enqueue(mafia.get(0));
+			mafia.dequeue(mafia.get(0));
 			//check to make sure the person with the most votes isn't safe
-			if(!mostVotes.getSafe()) {
-				mostVotes.setAlive(false);
-				players.remove(mostVotes);
+			if(mafiaVote.isEmpty()){
+            break;
+         }
+         else if(!mafiaVote.get(0).getSafe()) {
+				mafiaVote.get(0).setAlive(false);
+				players.remove(mafiaVote.get(0));
+            if(mafiaVote.get(0).getIsMafia())
+               mafia.remove(mafiaVote.get(0));
 			}
 			else {
 				safe = true;
 			}
+			//Application.launch(Day.class, args);//launch the day GUI
+			if(safe==false) {
+				System.out.println("Last night, the mafia decided to kill "+ mafiaVote.get(0).getName() +". Who could've done it? You decide.");
+			}
+			else {
+				System.out.println("Last night, the mafia decided to kill "+ mafiaVote.get(0).getName() +", BUT they were saved by the doctor. Who will they target next?");
+				safe=false;
+			}
 			mafiaVote.clear();
-			//add DAY PHASE GUI UPDATE DAY ==TRUE
 			//ask all players to vote on who they think is the mafia
 			for(int i=0; i<players.size(); i++) {
-				Voting(players, vote);
+				if(players.get(i).getAlive())
+               voting(players, vote);
 			}
 			//when all vote, figure out who gets murdered
-			int counter=0, most2=0;
-			Character mostVotes2 = null; safe = false;
+			int counter=0, most=0;
+			Character mostVotes = null; safe = false;
 			for(int k=0; k<players.size();k++) {
 				for(int j=0; j<vote.size(); j++) {
 					if(vote.get(j).getName().equals(players.get(k).getName())) {
 						counter++;
 					}
 				}
-				if(counter>most2) {
-					most2=counter;
-					mostVotes2 = players.get(k);
+				if(counter>most) {
+					most=counter;
+					mostVotes = players.get(k);
 				}
-				else {}
 			}
 			//check to make sure the person with the most votes isn't safe
-			if(!mostVotes2.getSafe()) {
-				mostVotes2.setAlive(false);
-				players.remove(mostVotes2);
+			if(!mostVotes.getSafe()) {
+				mostVotes.setAlive(false);
+				players.remove(mostVotes);
+            System.out.println("The town decided to execute "+mostVotes.getName()+" today. Who will be next?");
 			}
 			else {
 				safe = true;
 			}
 			vote.clear();
+			/*int count=0;
 			for(int i=1; i<players.size();i++){
-		       	if(players.get(i).getIsMafia() == mafiaOrTownWin)
-		        	win = true;
-		       else{
-		        	win = false;
-		          	break;
+		       	if(players.get(i).getIsMafia())
+		       		count++;
 		    }
-		          	}
+			if(count!=0) {
+				win = false;
 			}
-			//ask to play another round
-			if(JOptionPane.showConfirmDialog(null, "Play again?", "Play again?", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
+			else {
+				win = true;
+			}*/
+         win=false;
+         if(players.size()==1)
+            win=true;
+         if(players.size()==2 && !players.get(0).getIsMafia() && !players.get(1).getIsMafia())
+            win=true;
+         
+			}
+			//tell everyone who won
+         if((!mafia.isEmpty() && townies.isEmpty()))   
+            System.out.println("Mafia WON!");
+         else
+            System.out.println("The town WON!");
+         //ask to play another round
+         if(JOptionPane.showConfirmDialog(null, "Play again?", "Play again?", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION) {
 				keepPlaying = true;
 			}
 			else 
 				keepPlaying = false;
-		}
+         players.clear();
+			}
 		System.out.println("Thanks for playing!");
+      System.exit(0);
 	}
 	//method for mafia's vote at night
 	public static void mafiaNight(ArrayList<Character> players, ArrayList<Character> mafiaVote) {
@@ -174,15 +192,16 @@ public class GameDemo {//extends Application {
         	options[i] = players.get(i).getName();
         }
         String nameOfVote; Character voted = null;
-        nameOfVote = (String)JOptionPane.showInputDialog(frame, "Who would you like to murder tonight?", "Mafia = Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[8]);
+        nameOfVote = (String)JOptionPane.showInputDialog(frame, "Who would you like to murder tonight?", "Mafia = Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         for(int i=0; i<players.size(); i++) {
         		if(players.get(i).getName().equals(nameOfVote))
         			voted = players.get(i);
         }
         mafiaVote.add(voted);
-        
+        for(int i=0; i<options.length; i++){
+            options[i]=null;
+        }
 	}
-	
 	//method for police's actions at night
 	public static void policeNight(ArrayList<Character> players) {
 		JFrame frame = new JFrame("Police - Night Phase");
@@ -192,21 +211,19 @@ public class GameDemo {//extends Application {
         	options[i] = players.get(i).getName();
         }
         String nameOfInvest; Character investee = null;
-        nameOfInvest = (String)JOptionPane.showInputDialog(frame, "Who would you like to investigate tonight?", "Police - Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[8]); //dropdown
+        nameOfInvest = (String)JOptionPane.showInputDialog(frame, "Who would you like to investigate tonight?", "Police - Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[0]); //dropdown
 	    for(int i=0;i<players.size();i++) {
-	    	if(players.get(i).getName().equals(nameOfInvest))
-	    		investee = players.get(i);
+	    		if(players.get(i).getName().equals(nameOfInvest))
+	    			investee = players.get(i);
 	    }
 	    
 	    //sends pane saying status of investee
 	    JFrame investResult = new JFrame();  
-	    if(investee.getIsMafia()==false) {
-	    	JOptionPane.showMessageDialog(investResult,(investee.getName()+" is a member of the mafia.")); 
-	    	//System.exit(0);
+	    if(investee.getRole().equals("Mafia")) {
+	    		JOptionPane.showMessageDialog(investResult,(investee.getName()+" is a member of the mafia.")); 
 	    }
 	    else {
-	    	JOptionPane.showMessageDialog(investResult,(investee.getName()+" is not a member of the mafia.")); 
-	    	//System.exit(0);
+	    		JOptionPane.showMessageDialog(investResult,(investee.getName()+" is not a member of the mafia.")); 
 	    }
 	}
 	//method for doctor's actions at night
@@ -218,44 +235,47 @@ public class GameDemo {//extends Application {
         	options[i] = players.get(i).getName();
         }
         String nameOfSafe;
-        nameOfSafe = (String)JOptionPane.showInputDialog(frame, "Who would like to protect tonight?", "Doctor - Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[8]); //dropdown
+        nameOfSafe = (String)JOptionPane.showInputDialog(frame, "Who would like to protect tonight?", "Doctor - Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[0]); //dropdown
 	    for(int i=0;i<players.size();i++) {
-	    	if(players.get(i).getName().equals(nameOfSafe))
-	    		players.get(i).setSafe(true); //saves the one player
-	    	else
-	    		players.get(i).setSafe(false); //makes everyone else vulnerable
+	    		if(players.get(i).getName().equals(nameOfSafe))
+	    			players.get(i).setSafe(true); //saves the one player
+	    		else
+	    			players.get(i).setSafe(false); //makes everyone else vulnerable
 	    }
-	    //System.exit(0);
 	    
 	    //sends pane saying that it was done
 	    JFrame done = new JFrame();  
 	    JOptionPane.showMessageDialog(done,(nameOfSafe+" has been protected for the night."));  //reconfirms that that player has been saved
 	    
-	    //System.exit(0);
-	}
 	
+	}
+	//method for everyone to vote who mafia 
 	//Everyone daytime voting
-		public static void Voting (ArrayList<Character>players, ArrayList<Character>votes) {
+	public static void voting (ArrayList<Character>players, ArrayList<Character>votes) {
 		JFrame frame = new JFrame("Voting Phase");
         String[] options = new String[players.size()];
-        
-        for(int i=0; i<players.size(); i++) { // set the options to each player's name
-        	options[i] = players.get(i).getName();
+	        
+	    for(int i=0; i<players.size(); i++) { // set the options to each player's name
+	    		options[i] = players.get(i).getName();
         }
-        String exe; Character hang= null;
-        exe = (String)JOptionPane.showInputDialog(frame, "Who do you think the town should hang?", "Voting Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[0]); //dropdown
+	    String exe; Character hang= null;
+	    exe = (String)JOptionPane.showInputDialog(frame, "Who do you think the town should hang?", "Voting Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[0]); //dropdown
 	    for(int i=0;i<players.size();i++) {
-	    	if(players.get(i).getName().equals(exe))
-	    		hang = players.get(i);
-	    		votes.add(hang);
+	    		if(players.get(i).getName().equals(exe)) {
+		    		hang = players.get(i);
+		    		votes.add(hang);
+	    		}
 	    }
-	    //sends pane confirms
-	    JFrame thanks = new JFrame(); 
-	    	JOptionPane.showMessageDialog(thanks,("You have successfully voted for "+hang.getName())); 
-	    }
-		
-	 //for when the civilians don't need to do anything 
-		public static void fake() {
-			JOptionPane.showConfirmDialog(null, "Civilians don't do anything at night! But don't let your opponents know!");
+		//sends pane confirms
+		JFrame thanks = new JFrame(); 
+		JOptionPane.showMessageDialog(thanks,("You have successfully voted for "+hang.getName())); 
 	}
- }
+	//for when the civilians don't need to do anything 
+	public static void fake() {
+		JOptionPane.showConfirmDialog(null, "Civilians don't do anything at night! But don't let your opponents know!");
+	}
+	//for when its not the mafias turn
+	public static void fakeMafia() {
+		JOptionPane.showConfirmDialog(null, "You're a mafia but it is not your turn to kill! But don't let your opponents know!");
+	}
+}
