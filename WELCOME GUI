@@ -1,0 +1,57 @@
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
+
+public class WelcomeToMafia extends Application{
+      
+@Override
+public void start(Stage stage){
+   GridPane pane= new GridPane();
+   pane.setStyle("-fx-background-color:LIGHTBLUE");
+   
+   //create button, text and listener
+   Button button= new Button("LETS PLAY!");
+   button.setStyle("-fx-font:15 Arial");
+   button.setPrefSize(600,30);
+   button.setOnAction(this::processButtonPress);
+   Text text= new Text("Welcome to the game of Mafia! Today you and 7 other users are entering the world\n that is Mafia." + 
+   "Three of you will become the mafia, one of you will be chosen to\n become the town doctor, another the policeman! The" + 
+   " rest of you will be towns \n people.Within these roles you are to work with as well as against one another to \n figure" + 
+   " out who the mafia are and to kill them off. During the night, mafia, you are \n able to vote for who you want to kill." +
+   " Doctor, you get to vote for one person you \n want to save that night and the policeman, you are able to 'investigate'"+
+   " one person \n of your choice. If you are a townsperson you just get to sit back and relax, enjoy \n your evening! Maybe" +
+   " enjoy a nice glass of wine and indulge in your book. When the \n day comes, you are told all about the horrific events" +
+   " that occured the night before, \n who died and who they were. As the day progresses, everyone, including the \n townspeople" +
+   " are able to vote for who they believe to be the mafia, and they are \n excecuted before nightfall. To win this game, you must" +
+   " be careful and choose wisely\n - if the town kills all the mafia, the town wins, however if one of the mafia are last \n standing," +
+   " they are the winners! Now, its time to start- Hit 'Lets Play!' when you are \n ready enter the world and play Mafia!\n");
+   Font font1 = Font.font("Arial", FontWeight.BOLD,15);
+   text.setFont(font1);
+
+   pane.add(text, 0, 0);
+   pane.add(button, 0, 1);
+   
+   Scene scene= new Scene(pane,600,323);
+   stage.setTitle("Welcome- How you play!");
+   stage.setScene(scene);
+   stage.show();
+
+  }
+   public void processButtonPress(ActionEvent event){
+      System.exit(0);
+   } 
+  public static void main(String[] args) {
+        Application.launch(args);
+    }
+    
+}
