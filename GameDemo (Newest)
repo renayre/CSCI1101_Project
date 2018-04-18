@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 
 //import java.util.Random;
 
-public class GameDemo extends Application {
+public class GameDemo {//extends Application {
 	public static void main(String[]args) {
 		Scanner kb = new Scanner(System.in);
 		ArrayList<Character> vote = new ArrayList<Character>(); 
@@ -44,7 +44,22 @@ public class GameDemo extends Application {
 			//intake
 			//restate in chat and game
 			for(int i=1; i<=8; i++) {
-				System.out.print("Please enter your name: ");
+				Character c = new Character();
+				JFrame frame = new JFrame("Create Character");
+    			String name = JOptionPane.showInputDialog(frame, "Enter your desired username", "Create Character", JOptionPane.WARNING_MESSAGE);
+    			c.setName(name);
+    			c.setRole(role.get(0));
+    			System.exit(0);
+    		
+    			JFrame frame2 = new JFrame("Create Character");
+    			String pw = JOptionPane.showInputDialog(frame2, "Enter your desired password", "Create Character", JOptionPane.WARNING_MESSAGE);
+    			c.setPassword(pw);
+    			System.exit(0);
+				String currRole = c.getRole();
+				role.remove(0);
+				players.add(c);
+			}
+			/*	System.out.print("Please enter your name: ");
 				String name = kb.next();
 				Character c = new Character(); //create empty
 				c.setName(name);
@@ -52,11 +67,7 @@ public class GameDemo extends Application {
 				System.out.println("Please enter your password: ");
 				String password = kb.next();
 				c.setPassword(password);
-				String currRole = c.getRole();
-				role.remove(0);
-				players.add(c);
-			}
-		
+			 */
 			Game game = new Game(players);
 			//add while loop for WHILE THE MAFIA QUEUE ISN"T EMPTY or while only mafia left
 			//add night phase GUI
@@ -106,7 +117,7 @@ public class GameDemo extends Application {
 			//add DAY PHASE GUI UPDATE DAY ==TRUE
 			//ask all players to vote on who they think is the mafia
 			for(int i=0; i<players.size(); i++) {
-				voting(players, vote);
+				Voting(players, vote);
 			}
 			//when all vote, figure out who gets murdered
 			int counter=0, most2=0;
