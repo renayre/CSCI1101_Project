@@ -43,13 +43,12 @@ public class GameDemo {//extends Application {
 			}
 			//intake
 			//restate in chat and game
-			for(int i=1; i<=8; i++) {
+			for(int i=1; i<=8; i++) {;
 				Character c = new Character();
 				JFrame frame = new JFrame("Create Character");
     			String name = JOptionPane.showInputDialog(frame, "Enter your desired username", "Create Character", JOptionPane.WARNING_MESSAGE);
     			c.setName(name);
     			c.setRole(role.get(0));
-    			//System.exit(0);
     		
     			JFrame frame2 = new JFrame("Create Character");
     			String pw = JOptionPane.showInputDialog(frame2, "Enter your desired password", "Create Character", JOptionPane.WARNING_MESSAGE);
@@ -59,7 +58,10 @@ public class GameDemo {//extends Application {
 				role.remove(0);
 				players.add(c);
 			}
-			/*	System.out.print("Please enter your name: ");
+         for(int i=0; i<players.size(); i++){
+            System.out.println(players.get(i));
+			}
+         /*	System.out.print("Please enter your name: ");
 				String name = kb.next();
 				Character c = new Character(); //create empty
 				c.setName(name);
