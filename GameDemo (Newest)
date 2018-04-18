@@ -34,6 +34,7 @@ public class GameDemo extends Application {
 		ArrayList <Integer> role = new ArrayList<Integer>();
 		boolean keepPlaying = true;
 		boolean safe = false;
+		boolean day = false; //updates to false during nightPhase
 
 		while(keepPlaying) {
 			//adds numbs to arrayList to assign roles
@@ -62,7 +63,7 @@ public class GameDemo extends Application {
 			for(int i=0; i<players.size(); i++) {
 				String attempt1 = JOptionPane.showInputDialog(players.get(i).getName() + " please enter your password to take your turn.");
 				//if they get their password wrong
-				while(attempt1!=players.get(0).getPassword()) {
+				while(attempt1!=players.get(i).getPassword()) {
 					attempt1 = JOptionPane.showInputDialog(players.get(i).getName() + " looks like you input the wrong password! Please enter your password to take your turn.");
 				}
 				//when mafiaNight() method is called, to count up mafia votes
@@ -102,7 +103,7 @@ public class GameDemo extends Application {
 				safe = true;
 			}
 			mafiaVote.clear();
-			//add DAY PHASE GUI
+			//add DAY PHASE GUI UPDATE DAY ==TRUE
 			//ask all players to vote on who they think is the mafia
 			for(int i=0; i<players.size(); i++) {
 				voting(players, vote);
@@ -158,6 +159,7 @@ public class GameDemo extends Application {
         mafiaVote.add(voted);
         
 	}
+	
 	//method for police's actions at night
 	public static void policeNight(ArrayList<Character> players) {
 		JFrame frame = new JFrame("Police - Night Phase");
@@ -208,6 +210,7 @@ public class GameDemo extends Application {
 	    
 	    //System.exit(0);
 	}
+	
 	//Everyone daytime voting
 		public static void Voting (ArrayList<Character>players, ArrayList<Character>votes) {
 		JFrame frame = new JFrame("Voting Phase");
@@ -227,8 +230,9 @@ public class GameDemo extends Application {
 	    JFrame thanks = new JFrame(); 
 	    	JOptionPane.showMessageDialog(thanks,("You have successfully voted for "+hang.getName())); 
 	    }
-	    	//for when the civilians don't need to do anything 
-	public static void fake() {
-		JOptionPane.showConfirmDialog(null, "Civilians don't do anything at night! But don't let your opponents know!");
+		
+	 //for when the civilians don't need to do anything 
+		public static void fake() {
+			JOptionPane.showConfirmDialog(null, "Civilians don't do anything at night! But don't let your opponents know!");
 	}
  }
