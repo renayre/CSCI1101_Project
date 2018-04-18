@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import java.io.File;
 
 public class Night extends Application {
 @Override
@@ -21,6 +23,11 @@ public void start(Stage stage){
    GridPane pane= new GridPane();
    pane.setStyle("-fx-background-color:DARKBLUE");
  
+   
+   //Sound
+   String Music = "Crickets.mp3";    
+	AudioClip NightSound = new AudioClip(new File(Music).toURI().toString());
+
    //add house images 
    ImageView viewer= new ImageView();
    Image image= new Image(Day.class.getResourceAsStream("houses.png"));
@@ -142,7 +149,9 @@ public void start(Stage stage){
    Scene scene= new Scene(pane,600,400);
    stage.setTitle("It is night time- Be careful!");
    stage.setScene(scene);
+   NightSound.play();//play sound
    stage.setResizable(false);
+   
    stage.show();
  }
 public static void main(String[] args){
