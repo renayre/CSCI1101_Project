@@ -1,0 +1,223 @@
+import javafx.application.Application;
+import javafx.scene.control.*;
+import javafx.geometry.Pos;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.shape.*;
+import javafx.scene.text.Text;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.text.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import java.io.File;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+
+public class DayandNight extends Application {
+Button button, button1;
+GridPane pane;
+Rectangle rectangle,rectangle1,rectangle2,rectangleblue,rectangleblue1,rectangleblue2,rectangleblue3,rectangleblue4,rectangleblue5,rectangleblue6,rectangleblue7;
+Circle circle;
+ImageView viewer,viewer1,viewer2,viewer3,viewer4,viewer5,viewer6,viewer7,viewer8;
+AudioClip NightSound;
+Image image, image1,cloud, people;
+
+@Override
+public void start(Stage stage){
+   pane= new GridPane();
+   pane.setStyle("-fx-background-color:DARKBLUE");
+   button= new Button("DAY");
+   button1= new Button("NIGHT");
+   button.setStyle("-fx-font:20 Arial");
+   button1.setStyle("-fx-font:20 Arial");
+   button.setOnAction(this::processButtonPress);   
+   button1.setOnAction(this::processButtonPress);
+   
+   //Sound
+   String Music = "Crickets.mp3";    
+	NightSound = new AudioClip(new File(Music).toURI().toString());
+
+   //add house images 
+   viewer= new ImageView();
+   image= new Image(Day.class.getResourceAsStream("houses.png"));
+   viewer.setImage(image);
+   viewer.setFitHeight(80);
+   viewer.setFitWidth(150);
+   
+   viewer1= new ImageView();
+   image1= new Image(Day.class.getResourceAsStream("houses2.png"));
+   viewer1.setImage(image1);
+   viewer1.setFitHeight(80);
+   viewer1.setFitWidth(250);
+   
+   //cloud images
+   viewer2= new ImageView();
+   cloud= new Image(Day.class.getResourceAsStream("Star.png"));
+   viewer2.setImage(cloud);
+   viewer2.setFitHeight(50);
+   viewer2.setFitWidth(50);
+
+   viewer3= new ImageView();
+   viewer3.setImage(cloud);
+   viewer3.setFitHeight(60);
+   viewer3.setFitWidth(60);
+   
+   viewer4= new ImageView();
+   viewer4.setImage(cloud);
+   viewer4.setFitHeight(50);
+   viewer4.setFitWidth(50);
+   
+   //images for the people
+   viewer5= new ImageView();
+   people= new Image(Day.class.getResourceAsStream("PeoplePeople.png"));
+   viewer5.setImage(people);
+   viewer5.setFitHeight(80);
+   viewer5.setFitWidth(68);
+
+   //create a circle for moon
+   circle=new Circle();
+   circle.setRadius(40);
+   circle.setFill(Color.WHITE);
+   
+   //create a rectangle for grass
+   rectangle= new Rectangle();
+   rectangle.setHeight(100);
+   rectangle.setWidth(270);
+   rectangle.setFill(Color.GREEN);
+   
+   rectangle1= new Rectangle();
+   rectangle1.setHeight(100);
+   rectangle1.setWidth(270);
+   rectangle1.setFill(Color.GREEN);
+   
+   rectangle2= new Rectangle();
+   rectangle2.setHeight(100);
+   rectangle2.setWidth(270);
+   rectangle2.setFill(Color.GREEN);
+   
+   //rectangle for sky
+   rectangleblue= new Rectangle();
+   rectangleblue.setHeight(40);
+   rectangleblue.setWidth(200);
+   rectangleblue.setFill(Color.DARKBLUE);
+  
+   rectangleblue1= new Rectangle();
+   rectangleblue1.setHeight(40);
+   rectangleblue1.setWidth(200);
+   rectangleblue1.setFill(Color.DARKBLUE);
+
+   rectangleblue2= new Rectangle();
+   rectangleblue2.setHeight(40);
+   rectangleblue2.setWidth(200);
+   rectangleblue2.setFill(Color.DARKBLUE);
+   
+   rectangleblue3= new Rectangle();
+   rectangleblue3.setHeight(80);
+   rectangleblue3.setWidth(200);
+   rectangleblue3.setFill(Color.DARKBLUE);
+  
+   rectangleblue4= new Rectangle();
+   rectangleblue4.setHeight(80);
+   rectangleblue4.setWidth(200);
+   rectangleblue4.setFill(Color.DARKBLUE);
+
+   rectangleblue5= new Rectangle();
+   rectangleblue5.setHeight(80);
+   rectangleblue5.setWidth(200);
+   rectangleblue5.setFill(Color.DARKBLUE);
+   
+   rectangleblue6= new Rectangle();
+   rectangleblue6.setHeight(40);
+   rectangleblue6.setWidth(200);
+   rectangleblue6.setFill(Color.DARKBLUE);
+   
+   rectangleblue7= new Rectangle();
+   rectangleblue7.setHeight(80);
+   rectangleblue7.setWidth(200);
+   rectangleblue7.setFill(Color.DARKBLUE);
+
+
+   //add to grid pane 
+   pane.add(circle,0,0);
+   pane.add(viewer,0,4);
+   pane.add(viewer1,1,4);
+   pane.add(viewer2,1,2);
+   pane.add(viewer3,0,3);
+   pane.add(viewer4,2,2);
+   pane.add(rectangleblue,0,1);
+   pane.add(rectangleblue1,1,1);
+   pane.add(rectangleblue2,2,1);
+   pane.add(rectangleblue3,0,2);
+   pane.add(rectangleblue4,1,3);
+   pane.add(rectangleblue5,2,3);
+   pane.add(rectangleblue6,1,3);
+   pane.add(rectangleblue7,2,3);
+   pane.add(rectangle,0,5);
+   pane.add(rectangle1,1,5);
+   pane.add(rectangle2,2,5);
+   pane.add(button,1,6);
+   pane.add(button1,2,6);
+   
+   Scene scene= new Scene(pane,600,500);
+   stage.setTitle("It is night time- Be careful!");
+   stage.setScene(scene);
+   stage.setResizable(false);
+   stage.show();
+ }
+ public void processButtonPress(ActionEvent event){
+   if(event.getSource()==button){
+      pane.setStyle("-fx-background-color:LIGHTBLUE");
+      viewer6= new ImageView();
+      cloud= new Image(Day.class.getResourceAsStream("Cloud.png"));
+      viewer6.setImage(cloud);
+      viewer6.setFitHeight(80);
+      viewer6.setFitWidth(150);
+      pane.add(viewer6,1,2);
+      viewer7= new ImageView();
+      viewer7.setImage(cloud);
+      viewer7.setFitHeight(80);
+      viewer7.setFitWidth(150);
+      pane.add(viewer7,0,3);
+      viewer8= new ImageView();
+      viewer8.setImage(cloud);
+      viewer8.setFitHeight(80);
+      viewer8.setFitWidth(150);
+      pane.add(viewer8,2,2);
+      rectangleblue.setFill(Color.LIGHTBLUE);
+      rectangleblue1.setFill(Color.LIGHTBLUE);
+      rectangleblue2.setFill(Color.LIGHTBLUE);
+      rectangleblue3.setFill(Color.LIGHTBLUE);
+      rectangleblue4.setFill(Color.LIGHTBLUE);
+      rectangleblue5.setFill(Color.LIGHTBLUE);
+      rectangleblue6.setFill(Color.LIGHTBLUE);
+      rectangleblue7.setFill(Color.LIGHTBLUE);
+      String Music = "Mii.mp3";    
+	   AudioClip NightSound = new AudioClip(new File(Music).toURI().toString());
+      pane.add(viewer5,2,4);
+      NightSound.play();//play sound
+   } else if (event.getSource()==button1){
+      pane.setStyle("-fx-background-color:DARKBLUE");
+      cloud= new Image(Day.class.getResourceAsStream("Star.png"));
+      rectangleblue.setFill(Color.DARKBLUE);
+      rectangleblue1.setFill(Color.DARKBLUE);
+      rectangleblue2.setFill(Color.DARKBLUE);
+      rectangleblue3.setFill(Color.DARKBLUE);
+      rectangleblue4.setFill(Color.DARKBLUE);
+      rectangleblue5.setFill(Color.DARKBLUE);
+      rectangleblue6.setFill(Color.DARKBLUE);
+      rectangleblue7.setFill(Color.DARKBLUE);
+      String Music = "Crickets.mp3";    
+      NightSound.play();//play sound
+   }     
+ }
+public static void main(String[] args){
+   Application.launch(args);
+}
+}      
+   
