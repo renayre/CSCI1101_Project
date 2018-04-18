@@ -142,7 +142,7 @@ public class GameDemo extends Application {
 		System.out.println("Thanks for playing!");
 	}
 	//method for mafia's vote at night
-	/*public static void mafiaNight(ArrayList<Character> players) {
+	public static void mafiaNight(ArrayList<Character> players, ArrayList<Character> mafiaVote) {
 		JFrame frame = new JFrame("Mafia - Night Phase");
 		String[] options = new String[players.size()];
 		
@@ -152,9 +152,12 @@ public class GameDemo extends Application {
         String nameOfVote; Character voted = null;
         nameOfVote = (String)JOptionPane.showInputDialog(frame, "Who would you like to murder tonight?", "Mafia = Night Phase", JOptionPane.QUESTION_MESSAGE, null, options, options[8]);
         for(int i=0; i<players.size(); i++) {
-        	if(players.get(i).getName())
+        		if(players.get(i).getName().equals(nameOfVote))
+        			voted = players.get(i);
         }
-	}*/
+        mafiaVote.add(voted);
+        
+	}
 	//method for police's actions at night
 	public static void policeNight(ArrayList<Character> players) {
 		JFrame frame = new JFrame("Police - Night Phase");
